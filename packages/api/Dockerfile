@@ -1,5 +1,7 @@
 FROM node:12-alpine
 
+RUN apk --no-cache add --virtual builds-deps build-base python
+
 RUN yarn global add pnpm
 
 WORKDIR /usr/src/app
