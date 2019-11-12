@@ -1,0 +1,4 @@
+packages:
+  - '.'
+  - 'packages/webhook'
+  - 'packages/api'
