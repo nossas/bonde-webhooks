@@ -1,32 +1,57 @@
-#pipeline:
+pipeline:
   ## Publish on docker hub
 
-  # PACKAGE-NAME-publish:
-  #   image: plugins/docker
-  #   repo: nossas/bonde-auth-PACKAGE-NAME
-  #   group: publishing
-  #   secrets: [ docker_username, docker_password ]
-  #   dockerfile: packages/PACKAGE-NAME/Dockerfile
-  #   tags:
-  #     - ${DRONE_BRANCH/\//-}
-  #   when:
-  #     status: success
-  #     branch: [hotfix/*, release/*, feature/*, support/*, develop]
+  webhook-auth-publish:
+    image: plugins/docker
+    repo: nossas/bonde-auth-webhook
+    group: publishing
+    secrets: [ docker_username, docker_password ]
+    dockerfile: packages/webhook/Dockerfile
+    tags:
+      - ${DRONE_BRANCH/\//-}
+    when:
+      status: success
+      branch: [hotfix/*, release/*, feature/*, support/*, develop]
+
+  api-auth-publish:
+    image: plugins/docker
+    repo: nossas/bonde-auth-api
+    group: publishing
+    secrets: [ docker_username, docker_password ]
+    dockerfile: packages/api/Dockerfile
+    tags:
+      - ${DRONE_BRANCH/\//-}
+    when:
+      status: success
+      branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
   ## Deploy on rancher cluster - Staging
 
-  # PACKAGE-NAME-staging-deploy:
-  #   image: peloton/drone-rancher
-  #   url: http://cluster.bonde.org
-  #   service: auth/PACKAGE-NAME
-  #   group: deploying
-  #   docker_image: nossas/bonde-auth-PACKAGE-NAME:${DRONE_BRANCH/\//-}
-  #   timeout: 360
-  #   confirm: true
-  #   secrets: [ rancher_access_key, rancher_secret_key ]
-  #   when:
-  #     status: success
-  #     branch: [hotfix/*, release/*, feature/*, develop]
+  webhook-auth-staging-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: auth/webhook
+    group: deploying
+    docker_image: nossas/bonde-auth-webhook:${DRONE_BRANCH/\//-}
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
+    when:
+      status: success
+      branch: [hotfix/*, release/*, feature/*, develop]
+
+  api-auth-staging-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: auth/api
+    group: deploying
+    docker_image: nossas/bonde-auth-api:${DRONE_BRANCH/\//-}
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
+    when:
+      status: success
+      branch: [hotfix/*, release/*, feature/*, develop]
 
   ## Deploy on rancher cluster - Production
 
