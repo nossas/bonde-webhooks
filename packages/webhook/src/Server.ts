@@ -25,8 +25,7 @@ class Server {
       if (decoded) {
         const hasuraVariables = {
           'X-Hasura-User-Id': String(decoded.user_id),
-          'X-Hasura-Default-Role': decoded.role,
-          'X-Hasura-Allowed-Roles': `${decoded.role},anonymous`
+          'X-Hasura-Role': decoded.role
         }
         this.dbg(`Logged ${decoded.role} user.`)
         res.status(200).json(hasuraVariables)
