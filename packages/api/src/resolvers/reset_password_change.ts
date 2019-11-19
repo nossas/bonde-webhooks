@@ -4,9 +4,9 @@ import { JWT } from '../types'
 import { updateUser } from '../queries'
 import { reset_password_verify } from './'
 
-export default async (root, args, context, info): Promise<JWT> => {
+export default async (root, args): Promise<JWT> => {
   const { token, password } = args
-  const decoded = await reset_password_verify(null, { token }, context, info)
+  const decoded = await reset_password_verify(null, { token })
 
   const encrypted_password = await bcrypt.hash(password, 9)
   const user = await updateUser(decoded.id, { encrypted_password, reset_password_token: '' })
