@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken'
-import { findUser, updateUser } from '../queries'
+import { findUser, updateUser, getTemplate, sendMail } from '../queries'
 
 export default async (root, args): Promise<boolean> => {
   /*const { email, callback_url, locale = 'pt-BR' } = args*/
-  const { email } = args
+  const { email, locale, callback_url } = args
 
   // find user on database
   const user = await findUser({ email })
@@ -19,6 +19,21 @@ export default async (root, args): Promise<boolean> => {
   }
   const hash = jwt.sign(payload, process.env.JWT_SECRET)
   await updateUser(user.id, { reset_password_token: hash })
-  // TODO: send mail
-  return true
+  
+  // get notification with label 'reset_password_instructions'
+  const template = await getTemplate(locale)
+  if (template) {
+    // insert notify email with envs {{user.callback_url}} {{user.reset_password_token}} 
+    const notify = {
+      email_from: 'suporte@bonde.org',
+      email_to: user.email,
+      subject: template.subject_template,
+      body: template.body_template,
+      context: { user: { callback_url, reset_password_token: hash } }
+    }
+    await sendMail(notify)
+    return true
+  }
+  console.error('template_not_found')
+  return false
 }

@@ -82,3 +82,52 @@ export const updateUser = async (id: number, fields: UserUpdateFields): Promise<
     return null
   }
 }
+
+const FilterNotificationTemplateQuery = gql`
+query findTemplate ($where: notification_templates_bool_exp) {
+  notification_templates(where: $where) {
+    subject_template
+    body_template
+  }
+}
+`
+
+export interface NotificationTemplate {
+  subject_template: string
+  body_template: string
+}
+
+export const getTemplate = async (locale: string): Promise<NotificationTemplate | null> => {
+  try {
+    const where = { label: { _eq: "reset_password_instructions" }, locale: { _eq: locale } }
+    const resp = await GraphQLAPI.query({ query: FilterNotificationTemplateQuery, variables: { where }, fetchPolicy: 'network-only' })
+    if (resp.data && resp.data.notification_templates.length > 0) {
+      return resp.data.notification_templates[0]
+    }
+    return null
+  } catch (err) {
+    console.log('err', err)
+    return null
+  }
+}
+
+export const sendMail = async (input: any) => {
+  try {
+    const insertMailMutation = gql`
+      mutation SendMail ($input: [notify_mail_insert_input!]!){
+        insert_notify_mail(objects: $input) {
+          returning {
+            email_to
+            email_from
+            created_at
+            delivered_at
+          }
+        }
+      }
+    `
+
+    return GraphQLAPI.mutate({ mutation: insertMailMutation, variables: { input } })
+  } catch (err) {
+    console.log(err)
+  }
+}
