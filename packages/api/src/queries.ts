@@ -99,7 +99,7 @@ export interface NotificationTemplate {
 
 export const getTemplate = async (locale: string): Promise<NotificationTemplate | null> => {
   try {
-    const where = { label: { _eq: "reset_password_instructions" }, locale: { _eq: locale } }
+    const where = { label: { _eq: "reset_password_instructions" }, locale: { _ilike: locale } }
     const resp = await GraphQLAPI.query({ query: FilterNotificationTemplateQuery, variables: { where }, fetchPolicy: 'network-only' })
     if (resp.data && resp.data.notification_templates.length > 0) {
       return resp.data.notification_templates[0]
