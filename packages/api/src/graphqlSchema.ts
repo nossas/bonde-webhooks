@@ -8,6 +8,7 @@ import {
 export const typeDefs = `
 	type Query {
     authenticate(email: String!, password: String!): JWT
+    reset_password_verify(token: String!): DecodedToken
   }
   type Mutation {
     authenticate(email: String!, password: String!): JWT
@@ -15,13 +16,14 @@ export const typeDefs = `
     reset_password_verify(token: String!): DecodedToken
     reset_password_change(password: String!, token: String!): JWT
   }
-  type JWT { valid: Boolean!, token: String }
+  type JWT { valid: Boolean!, token: String, first_name: String }
   type DecodedToken { id: Int!, expired_at: Int!, iat: Int! }
 `
 
 export const resolvers = {
   Query: {
-    authenticate
+    authenticate,
+    reset_password_verify
   },
   Mutation: {
     authenticate,

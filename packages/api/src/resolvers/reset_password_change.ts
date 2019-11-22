@@ -20,5 +20,5 @@ export default async (root, args): Promise<JWT> => {
   }
   const options = { audience: 'postgraphile' }
 
-  return { valid: true, token: jwt.sign(payload, process.env.JWT_SECRET, options) }
+  return { valid: true, token: jwt.sign(payload, process.env.JWT_SECRET, options), first_name: user.first_name }
 }
