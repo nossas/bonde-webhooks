@@ -22,18 +22,17 @@ export default async (root, args): Promise<boolean> => {
   
   // get notification with label 'reset_password_instructions'
   const template = await getTemplate(locale)
-  if (template) {
-    // insert notify email with envs {{user.callback_url}} {{user.reset_password_token}} 
-    const notify = {
-      email_from: 'suporte@bonde.org',
-      email_to: user.email,
-      subject: template.subject_template,
-      body: template.body_template,
-      context: { user: { callback_url, reset_password_token: hash } }
-    }
-    await sendMail(notify)
-    return true
+  
+  if (!template) throw new Error('template_not_found')
+  
+  // insert notify email with envs {{user.callback_url}} {{user.reset_password_token}} 
+  const notify = {
+    email_from: 'suporte@bonde.org',
+    email_to: user.email,
+    subject: template.subject_template,
+    body: template.body_template,
+    context: { user: { callback_url, reset_password_token: hash } }
   }
-  console.error('template_not_found')
-  return false
+  await sendMail(notify)
+  return true
 }
