@@ -29,6 +29,18 @@
   "scripts": {
     "dev": "DEBUG=bonde-auth-api tsc-watch --onSuccess \"node dist/index.js\"",
     "clean": "rm -rf node_modules dist",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint . --ext js,ts,tsx --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix --ext js,ts,tsx",
+      "git add"
+    ]
   }
 }
