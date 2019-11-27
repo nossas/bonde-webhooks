@@ -20,7 +20,7 @@ export interface User {
   email: string
   first_name: string
   last_name?: string
-  encrypted_password: string
+  encrypted_password?: string
   admin: boolean
   reset_password_token?: string
 }
@@ -129,5 +129,28 @@ export const sendMail = async (input: any) => {
     return GraphQLAPI.mutate({ mutation: insertMailMutation, variables: { input } })
   } catch (err) {
     console.log(err)
+  }
+}
+
+export const createUser = async (input: any): Promise<User | null> => {
+  try {
+    const insertUserMutation = gql`
+      mutation createUser ($input: [users_insert_input!]!) {
+        insert_users(objects: $input) {
+          returning {
+            id
+            email
+            first_name
+            admin
+          }
+        }
+      }
+    `
+
+    const { data } = await GraphQLAPI.mutate({ mutation: insertUserMutation, variables: { input } })
+    return data && data.insert_users ? data.insert_users.returning[0] : null
+  } catch (err) {
+    console.log(err)
+    return null
   }
 }
