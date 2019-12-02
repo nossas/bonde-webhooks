@@ -25,7 +25,7 @@ export const typeDefs = `
     first_name: String!,
     last_name: String,
     password: String!,
-    invitation_code: String
+    invitation_code: String!
   }
 `
 

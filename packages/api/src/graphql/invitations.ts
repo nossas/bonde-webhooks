@@ -1,11 +1,18 @@
 import gql from 'graphql-tag'
 import GraphQLAPI from '../GraphQLAPI'
 
+export interface Community {
+	id: number
+	name: string
+	image?: string
+}
+
 export interface Invite {
+	id: number
 	expired?: boolean
 	expires: Date
 	role: number
-	community_id: number
+	community: Community
 }
 
 export interface FilterInvitation {
@@ -25,10 +32,15 @@ export const find = async (variables: FilterInvitation): Promise<Invite> => {
 		      }
 		    }
 			) {
+				id
 		    expired
 		    expires
 		    role
-		    community_id
+		    community {
+		      id
+		      name
+		      image
+		    }
 		  }
 		}
 	`
@@ -37,5 +49,29 @@ export const find = async (variables: FilterInvitation): Promise<Invite> => {
   if (resp.data && resp.data.invitations.length > 0) {
     return resp.data.invitations[0]
   }
-  throw new Error('invitation_code_expired')
+  throw new Error('invalid_invitation_code')
+}
+
+export const done = async (id: number): Promise<Invite> => {
+  const UpdateInvitationQuery = gql`
+    mutation UpdateInvitation ($id: Int!) {
+      update_invitations(where: { id: { _eq: $id }}, _set: { expired: true }) {
+        returning {
+					id
+			    expired
+			    expires
+			    role
+			    community {
+			    	id
+			    	name
+			    	image
+			    }
+        }
+      }
+    }
+  `
+  const variables = { id }
+  const resp = await GraphQLAPI.mutate({ mutation: UpdateInvitationQuery, variables })
+
+  return resp.data.update_invitations.returning[0]
 }
