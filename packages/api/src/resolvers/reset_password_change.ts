@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { JWT } from '../types'
-import { updateUser } from '../queries'
+import * as UsersAPI from '../graphql/users'
 import { reset_password_verify } from './'
 
 export default async (root, args): Promise<JWT> => {
@@ -9,7 +9,8 @@ export default async (root, args): Promise<JWT> => {
   const decoded = await reset_password_verify(null, { token })
 
   const encrypted_password = await bcrypt.hash(password, 9)
-  const user = await updateUser(decoded.id, { encrypted_password, reset_password_token: '' })
+
+  const user = await UsersAPI.update(decoded.id, { encrypted_password, reset_password_token: '' })
 
   if (!user) throw new Error('user_not_found')
 

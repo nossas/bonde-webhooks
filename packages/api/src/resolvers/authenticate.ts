@@ -1,28 +1,19 @@
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import { findUser } from '../queries'
+import * as UsersAPI from '../graphql/users'
 import { JWT } from '../types'
+import { generateJWT } from '../utils'
 
 export default async (root, args): Promise<JWT> => {
   const { email, password } = args
+  const errorCode = 'email_password_dismatch'
 
-  const user = await findUser({ email })
-  if (!user) throw new Error('user_not_found')
+  const user = (await UsersAPI.find({ email }))[0]
 
-  const isValid = await bcrypt.compare(password, user.encrypted_password)
-  
-  if (isValid) {
-    const payload = {
-      sub: 'postgraphql',
-      role: user.admin ? 'admin' : 'common_user',
-      user_id: user.id
-    }
-    const options = { audience: 'postgraphile' }
-    
-    const token = jwt.sign(payload, process.env.JWT_SECRET, options)
+  if (!user) throw new Error(errorCode)
 
-    return { valid: true, token }
+  if (await bcrypt.compare(password, user.encrypted_password)) {
+    return { valid: true, token: generateJWT(user), first_name: user.first_name }
   }
-  
-  return { valid: false }
+
+  throw new Error(errorCode)
 }
