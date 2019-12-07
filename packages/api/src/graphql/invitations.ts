@@ -2,26 +2,26 @@ import gql from 'graphql-tag'
 import GraphQLAPI from '../GraphQLAPI'
 
 export interface Community {
-	id: number
-	name: string
-	image?: string
+  id: number
+  name: string
+  image?: string
 }
 
 export interface Invite {
-	id: number
-	expired?: boolean
-	expires: Date
-	role: number
-	community: Community
+  id: number
+  expired?: boolean
+  expires: Date
+  role: number
+  community: Community
 }
 
 export interface FilterInvitation {
-	code: string
-	email: string
+  code: string
+  email: string
 }
 
 export const find = async (variables: FilterInvitation): Promise<Invite> => {
-	const FilterInvitationsQuery = gql`
+  const FilterInvitationsQuery = gql`
 		query Invitations($code: String!, $email: String!) {
 		  invitations(
 		    where: {
