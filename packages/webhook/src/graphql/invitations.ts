@@ -14,7 +14,7 @@ export interface Invite {
   role: number
   code: string
   community: Community
-  email: String
+  email: string
 }
 
 export const update = async (id: number, code: string): Promise<Invite> => {
@@ -27,6 +27,7 @@ export const update = async (id: number, code: string): Promise<Invite> => {
 			    expires
 			    role
           code
+          email
 			    community {
 			    	id
 			    	name

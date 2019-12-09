@@ -18,7 +18,8 @@
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.2.1",
     "source-map-support": "^0.5.13",
-    "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "url-join": "^4.0.1"
   },
   "scripts": {
     "dev": "DEBUG=bonde-auth-webhook tsc-watch --onSuccess \"node dist/index.js\"",

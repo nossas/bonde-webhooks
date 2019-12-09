@@ -134,6 +134,7 @@ importers:
       md5: 2.2.1
       source-map-support: 0.5.16
       typescript: 3.7.2
+      url-join: 4.0.1
     specifiers:
       '@types/debug': ^4.1.5
       '@types/dotenv': ^6.1.1
@@ -153,6 +154,7 @@ importers:
       md5: ^2.2.1
       source-map-support: ^0.5.13
       typescript: ^3.6.4
+      url-join: ^4.0.1
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.5.5:
@@ -5381,6 +5383,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
+  /url-join/4.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-jk1+QP6ZJqyOiuEI9AEWQfju/nB2Pw466kbA0LEZljHwKeMgd9WrAEgEGxjPDD2+TNbbb37rTyhEfrCXfuKXnA==
   /use/3.1.1:
     dev: true
     engines:
