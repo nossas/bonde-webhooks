@@ -83,3 +83,31 @@ export const find = async (params: UserFilter): Promise<User[]> => {
   const resp = await GraphQLAPI.query({ query: UserFilterQuery, variables: { where }, fetchPolicy: 'network-only' })
   return resp.data.users
 }
+
+export interface RelationshipInput {
+  community_id: number
+  user_id: number
+  role: number
+}
+
+export interface Relationship extends RelationshipInput {
+  id: number
+}
+
+export const relationship = async (input: RelationshipInput): Promise<Relationship> => {
+  const InsertCommunityUsersMutation = gql`
+    mutation InsertCommunityUsers($input: community_users_insert_input!) {
+      insert_community_users(objects: [$input]) {
+        returning {
+          id
+          user_id
+          role
+          community_id
+        }
+      }
+    }
+  `
+  const { data } = await GraphQLAPI.mutate({ mutation: InsertCommunityUsersMutation, variables: { input } })
+
+  return data.insert_community_users.returning[0]
+}
