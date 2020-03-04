@@ -19,25 +19,31 @@ export default async (root, args): Promise<JWT> => {
     first_name,
     last_name,
     admin: false,
-    encrypted_password: await bcrypt.hash(password, 9),
-    community_users: {}
+    encrypted_password: await bcrypt.hash(password, 9)
   }
 
-  const invite = await InvitationsAPI.find({ code: invitation_code, email })
-  values.community_users = { data: { role: invite.role, community_id: invite.community.id } }
+  let user;
 
-  // Create user and generate token
-  const user = await UsersAPI.insert(values)
+  if (invitation_code) {
+    const invite = await InvitationsAPI.find({ code: invitation_code, email })
+    values.community_users = { data: { role: invite.role, community_id: invite.community.id } }
 
-  // Become invite invlid
-  await InvitationsAPI.done(invite.id)
-  
-  // Send welcome_user e-mail
-  const context = { community: invite.community, user: { first_name: user.first_name } }
-  await NotificationsAPI.send(
-    { email_to: user.email, email_from: 'suporte@bonde.org', context },
-    { locale: 'pt-br', label: 'welcome_user' }
-  )
+    // Create user and generate token
+    user = await UsersAPI.insert(values)
+
+    // Become invite invlid
+    await InvitationsAPI.done(invite.id)
+
+    // Send welcome_user e-mail
+    const context = { community: invite.community, user: { first_name: user.first_name } }
+    await NotificationsAPI.send(
+      { email_to: user.email, email_from: 'suporte@bonde.org', context },
+      { locale: 'pt-br', label: 'welcome_user' }
+    )
+  } else {
+    // Create user and generate token
+    user = await UsersAPI.insert(values)
+  }
 
   // Return token to login user after register
   return { first_name: user.first_name, valid: true, token: generateJWT(user) }

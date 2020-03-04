@@ -13,7 +13,7 @@ export const typeDefs = `
     first_name: String!,
     last_name: String,
     password: String!,
-    invitation_code: String!
+    invitation_code: String
   }
   type DecodedToken { id: Int!, expired_at: Int!, iat: Int! }
   type JWT { valid: Boolean!, token: String, first_name: String }
