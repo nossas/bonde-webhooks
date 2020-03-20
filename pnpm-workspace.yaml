@@ -2,3 +2,4 @@ packages:
   - '.'
   - 'packages/webhook'
   - 'packages/api'
+  - 'packages/client-auth'
