@@ -127,7 +127,7 @@ importers:
       '@types/react-router': 5.1.4
       '@types/react-router-dom': 5.1.3
       bonde-components: 0.0.2-alpha.2_react-dom@16.13.1+react@16.13.1
-      bonde-core-tools: 0.0.9_6c2bc62ec9c1b4526c44154a68bc526b
+      bonde-core-tools: 0.1.1-0_6c2bc62ec9c1b4526c44154a68bc526b
       graphql-tag: 2.10.3
       history: 4.10.1
       react: 16.13.1
@@ -148,7 +148,7 @@ importers:
       '@types/react-router': ^5.1.4
       '@types/react-router-dom': ^5.1.3
       bonde-components: 0.0.2-alpha.2
-      bonde-core-tools: 0.0.9
+      bonde-core-tools: 0.1.1-0
       graphql-tag: ^2.10.3
       history: ^4.10.1
       react: ^16.13.1
@@ -309,8 +309,17 @@ packages:
       jsesc: 2.5.2
       lodash: 4.17.15
       source-map: 0.5.7
+    dev: false
     resolution:
       integrity: sha512-onl4Oy46oGCzymOXtKMQpI7VXtCbTSHK1kqBydZ6AmzuNcacEVqGk9tZtAS+48IA9IstZcDCgIg8hQKnb7suRw==
+  /@babel/generator/7.9.3:
+    dependencies:
+      '@babel/types': 7.9.0
+      jsesc: 2.5.2
+      lodash: 4.17.15
+      source-map: 0.5.7
+    resolution:
+      integrity: sha512-RpxM252EYsz9qLUIq6F7YJyK1sv0wWDBFuztfDGWaQKzHjqDHysxSiRUpA/X9jmfqo+WzkAVKFaUily5h+gDCQ==
   /@babel/helper-annotate-as-pure/7.8.3:
     dependencies:
       '@babel/types': 7.9.0
@@ -561,6 +570,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-Iwyp00CZsypoNJcpXCbq3G4tcDgphtlMwMVrMhhZ//XBkqjXF7LW6V511yk0+pBX3ZwwGnPea+pTKNJiqA7pUg==
+  /@babel/parser/7.9.3:
+    engines:
+      node: '>=6.0.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-E6SpIDJZ0cZAKoCNk+qSDd0ChfTnpiJN9FfNf3RZ20dzwA2vL2oq5IX1XTVT+4vDmRlta2nGk5HGMMskJAR+4A==
   /@babel/plugin-proposal-async-generator-functions/7.8.3_@babel+core@7.8.4:
     dependencies:
       '@babel/core': 7.8.4
@@ -1413,7 +1428,7 @@ packages:
   /@babel/template/7.8.6:
     dependencies:
       '@babel/code-frame': 7.8.3
-      '@babel/parser': 7.9.0
+      '@babel/parser': 7.9.3
       '@babel/types': 7.9.0
     resolution:
       integrity: sha512-zbMsPMy/v0PWFZEhQJ66bqjhH+z0JgMoBWuikXybgG3Gkd/3t5oQ1Rw2WQhnSrsOmsKXnZOx15tkC4qON/+JPg==
@@ -1433,10 +1448,10 @@ packages:
   /@babel/traverse/7.9.0:
     dependencies:
       '@babel/code-frame': 7.8.3
-      '@babel/generator': 7.9.0
+      '@babel/generator': 7.9.3
       '@babel/helper-function-name': 7.8.3
       '@babel/helper-split-export-declaration': 7.8.3
-      '@babel/parser': 7.9.0
+      '@babel/parser': 7.9.3
       '@babel/types': 7.9.0
       debug: 4.1.1
       globals: 11.12.0
@@ -3313,7 +3328,7 @@ packages:
       react-dom: '*'
     resolution:
       integrity: sha512-wUkjOaH7QU1524g7L+8W5gJV1qrwMEj5jtZHl7ntNtpsQDtGgAWG6t/yCulOCwiDIFIOXk1kg/hJeonDlCPW9g==
-  /bonde-core-tools/0.0.9_6c2bc62ec9c1b4526c44154a68bc526b:
+  /bonde-core-tools/0.1.1-0_6c2bc62ec9c1b4526c44154a68bc526b:
     dependencies:
       '@apollo/react-hooks': 3.1.3_d1d6a902f85027ce420e118dc589617d
       '@types/react-router-dom': 5.1.3
@@ -3332,7 +3347,7 @@ packages:
       react: '>=16'
       react-dom: '*'
     resolution:
-      integrity: sha512-bE92nMZ6SM6nKSKGahEFHjXwloVx4ODi/t4SxDpW0PYFEvKjiDb4/cq7mIBWREjhCi8wzudk/pWTS4EXk0sWxA==
+      integrity: sha512-8gQr8wQ6S5bHKHwiT7eiXLUMqTP6WV/dEauqhUeBZUrnO/esbBYAePKpGuSI21DOs6B87yW1O4DRl6blLVodtQ==
   /bonjour/3.5.0:
     dependencies:
       array-flatten: 2.1.2
