@@ -1,6 +1,19 @@
 pipeline:
-  ## Publish on docker hub
+  ## Build and Tests
+  build:
+    image: node:12
+    environment:
+      - REACT_APP_HASURA_API_URL=https://api-graphql.staging.bonde.org/v1/graphql
+      - REACT_APP_ADMIN_URL=https://admin-canary.staging.bonde.org/admin
+      - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.staging.bonde.org
+    commands:
+      - yarn global add pnpm
+      - pnpm i
+      - pnpm m run build
+    when:
+      event: [push]
 
+  ## Publish on docker hub
   webhook-auth-publish:
     image: plugins/docker
     repo: nossas/bonde-auth-webhook
@@ -24,15 +37,26 @@ pipeline:
     when:
       status: success
       branch: [hotfix/*, release/*, feature/*, support/*, develop]
+  
+  client-auth-publish:
+    image: plugins/docker
+    repo: nossas/bonde-auth-client
+    secrets: [ docker_username, docker_password ]
+    dockerfile: packages/client-auth/Dockerfile
+    group: publish
+    tags:
+      - ${DRONE_BRANCH/\//-}
+    when:
+      status: success
+      branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
   ## Deploy on rancher cluster - Staging
-
   webhook-auth-staging-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
     service: auth/webhook
     group: deploying
-    docker_image: nossas/bonde-auth-webhook:${DRONE_BRANCH/\//-}
+    docker_image: nossas/bonde-auth:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
@@ -45,7 +69,7 @@ pipeline:
     url: http://cluster.bonde.org
     service: auth/api
     group: deploying
-    docker_image: nossas/bonde-auth-api:${DRONE_BRANCH/\//-}
+    docker_image: nossas/bonde-auth:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
@@ -53,21 +77,15 @@ pipeline:
       status: success
       branch: [hotfix/*, release/*, feature/*, develop]
 
-  ## Deploy on rancher cluster - Production
-
-  # PACKAGE-NAME-production-deploy:
-  #   image: peloton/drone-rancher
-  #   url: http://cluster.bonde.org
-  #   service: auth/PACKAGE-NAME
-  #   docker_image: "nossas/bonde-auth-PACKAGE-NAME:${DRONE_TAG##v}"
-  #   timeout: 360
-  #   group: deploy
-  #   confirm: true
-  #   secrets:
-  #     - source: rancher_access_key_prod
-  #       target: rancher_access_key
-  #     - source: rancher_secret_key_prod
-  #       target: rancher_secret_key
-  #   when:
-  #     status: success
-  #     event: tag
+  client-auth-staging-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: auth/client
+    group: deploying
+    docker_image: nossas/bonde-auth:${DRONE_BRANCH/\//-}
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
+    when:
+      status: success
+      branch: [hotfix/*, release/*, feature/*, develop]

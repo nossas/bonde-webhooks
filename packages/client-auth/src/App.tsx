@@ -12,11 +12,11 @@ const history = createBrowserHistory();
 const config = {
   crossStorageUrl: process.env.REACT_APP_DOMAIN_CROSS_STORAGE || 'http://cross-storage.bonde.devel',
   graphqlApiUrl: process.env.REACT_APP_HASURA_API_URL || 'https://api-graphql.staging.bonde.org/v1/graphql'
-}
+};
 
 interface TextLoadingProps {
   fetching: 'session' | 'redirect'
-}
+};
 
 const TextLoading = ({ fetching }: TextLoadingProps) => {
   const messages = {
@@ -52,6 +52,6 @@ const App = () => {
       </Router>
     </BondeSessionProvider>
   );
-}
+};
 
 export default App;
