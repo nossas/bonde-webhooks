@@ -14,35 +14,36 @@ pipeline:
       event: [push]
 
   ## Publish on docker hub
-  webhook-auth-publish:
-    image: plugins/docker
-    repo: nossas/bonde-auth-webhook
-    group: publishing
-    secrets: [ docker_username, docker_password ]
-    dockerfile: packages/webhook/Dockerfile
-    tags:
-      - ${DRONE_BRANCH/\//-}
-    when:
-      status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
+  # webhook-auth-publish:
+  #   image: plugins/docker
+  #   repo: nossas/bonde-auth-webhook
+  #   group: publishing
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/webhook/Dockerfile
+  #   tags:
+  #     - ${DRONE_BRANCH/\//-}
+  #   when:
+  #     status: success
+  #     branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
-  api-auth-publish:
-    image: plugins/docker
-    repo: nossas/bonde-auth-api
-    group: publishing
-    secrets: [ docker_username, docker_password ]
-    dockerfile: packages/api/Dockerfile
-    tags:
-      - ${DRONE_BRANCH/\//-}
-    when:
-      status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
+  # api-auth-publish:
+  #   image: plugins/docker
+  #   repo: nossas/bonde-auth-api
+  #   group: publishing
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/api/Dockerfile
+  #   tags:
+  #     - ${DRONE_BRANCH/\//-}
+  #   when:
+  #     status: success
+  #     branch: [hotfix/*, release/*, feature/*, support/*, develop]
   
   client-auth-publish:
     image: plugins/docker
     repo: nossas/bonde-auth-client
     secrets: [ docker_username, docker_password ]
     dockerfile: packages/client-auth/Dockerfile
+    context: packages/client-auth/
     group: publish
     tags:
       - ${DRONE_BRANCH/\//-}
@@ -51,41 +52,41 @@ pipeline:
       branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
   ## Deploy on rancher cluster - Staging
-  webhook-auth-staging-deploy:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: auth/webhook
-    group: deploying
-    docker_image: nossas/bonde-auth:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
-    when:
-      status: success
-      branch: [hotfix/*, release/*, feature/*, develop]
+  # webhook-auth-staging-deploy:
+  #   image: peloton/drone-rancher
+  #   url: http://cluster.bonde.org
+  #   service: auth/webhook
+  #   group: deploying
+  #   docker_image: nossas/bonde-auth:${DRONE_BRANCH/\//-}
+  #   timeout: 360
+  #   confirm: true
+  #   secrets: [ rancher_access_key, rancher_secret_key ]
+  #   when:
+  #     status: success
+  #     branch: [hotfix/*, release/*, feature/*, develop]
 
-  api-auth-staging-deploy:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: auth/api
-    group: deploying
-    docker_image: nossas/bonde-auth:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
-    when:
-      status: success
-      branch: [hotfix/*, release/*, feature/*, develop]
+  # api-auth-staging-deploy:
+  #   image: peloton/drone-rancher
+  #   url: http://cluster.bonde.org
+  #   service: auth/api
+  #   group: deploying
+  #   docker_image: nossas/bonde-auth:${DRONE_BRANCH/\//-}
+  #   timeout: 360
+  #   confirm: true
+  #   secrets: [ rancher_access_key, rancher_secret_key ]
+  #   when:
+  #     status: success
+  #     branch: [hotfix/*, release/*, feature/*, develop]
 
-  client-auth-staging-deploy:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: auth/client
-    group: deploying
-    docker_image: nossas/bonde-auth:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
-    when:
-      status: success
-      branch: [hotfix/*, release/*, feature/*, develop]
+  # client-auth-staging-deploy:
+  #   image: peloton/drone-rancher
+  #   url: http://cluster.bonde.org
+  #   service: auth/client
+  #   group: deploying
+  #   docker_image: nossas/bonde-auth:${DRONE_BRANCH/\//-}
+  #   timeout: 360
+  #   confirm: true
+  #   secrets: [ rancher_access_key, rancher_secret_key ]
+  #   when:
+  #     status: success
+  #     branch: [hotfix/*, release/*, feature/*, develop]

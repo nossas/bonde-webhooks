@@ -1,13 +1,10 @@
 FROM node:12
-
-RUN yarn global add pnpm serve
+MAINTAINER Nossas <tech@nossas.org>
 
 WORKDIR /usr/src/app
 
-COPY ./ .
+RUN npm install -g serve
 
-RUN pnpm m i --filter bonde-auth --filter client-auth
+COPY . .
 
-RUN pnpm m run build --filter client-auth
-
-CMD serve -s ./packages/client-auth/build
+CMD serve -s packages/client-auth/build
