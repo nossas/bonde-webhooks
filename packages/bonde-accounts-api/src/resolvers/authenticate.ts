@@ -4,6 +4,7 @@ import { JWT } from '../types'
 import { generateJWT } from '../utils'
 
 export default async (root, args): Promise<JWT> => {
+  console.log('authenticate')
   const { email, password } = args
   const errorCode = 'email_password_dismatch'
 
