@@ -7,32 +7,12 @@ import {
 } from 'bonde-components';
 import { Form as FinalForm } from 'react-final-form';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import Container from '../../components/Container';
 import { composeValidators, required, isEmail } from '../../validations';
 
 interface LoginFormProps {
   onSubmit: any;
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-
-  @media only screen and (max-width: 768px) {
-    flex-direction: column-reverse;
-
-    ${LinkStyled}, button {
-      width: 100%;
-      text-align: center;
-    }
-
-    ${LinkStyled} {
-      padding: 10px 0;
-    }
-  }
-`;
 
 const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) =>
   <FinalForm onSubmit={onSubmit}>

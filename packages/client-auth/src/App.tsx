@@ -3,10 +3,12 @@ import { BondeSessionProvider } from 'bonde-core-tools';
 import { Router, Route, Redirect } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 import BaseLayout from './components/BaseLayout';
-import LoginPage from './components/LoginPage';
-import RegisterForm from './components/RegisterForm';
+// import RegisterForm from './components/RegisterForm';
 import SessionRedirect from './components/SessionRedirect';
 import TextLoading from './components/TextLoading';
+
+import LoginPage from './scenes/LoginPage';
+import RegisterPage from './scenes/RegisterPage';
 
 const history = createBrowserHistory();
 
@@ -30,7 +32,7 @@ const App = () => {
               <LoginPage to={appUrl} />
             </Route>
             <Route exact path='/auth/register'>
-              <RegisterForm />
+              <RegisterPage to={appUrl} />
             </Route>
           </BaseLayout>
         </SessionRedirect>

@@ -127,7 +127,7 @@ importers:
       '@types/react-router': 5.1.4
       '@types/react-router-dom': 5.1.3
       '@types/styled-components': 5.0.1
-      bonde-components: 0.0.2-alpha.6_4c2989364b476e9b13a38ab6e691709a
+      bonde-components: 0.0.2-alpha.8_4c2989364b476e9b13a38ab6e691709a
       bonde-core-tools: 0.1.1-0_6c2bc62ec9c1b4526c44154a68bc526b
       final-form: 4.18.7
       graphql-tag: 2.10.3
@@ -153,7 +153,7 @@ importers:
       '@types/react-router': ^5.1.4
       '@types/react-router-dom': ^5.1.3
       '@types/styled-components': ^5.0.1
-      bonde-components: 0.0.2-alpha.6
+      bonde-components: 0.0.2-alpha.8
       bonde-core-tools: 0.1.1-0
       final-form: ^4.18.7
       graphql-tag: ^2.10.3
@@ -3811,7 +3811,7 @@ packages:
       react-dom: '*'
     resolution:
       integrity: sha512-wUkjOaH7QU1524g7L+8W5gJV1qrwMEj5jtZHl7ntNtpsQDtGgAWG6t/yCulOCwiDIFIOXk1kg/hJeonDlCPW9g==
-  /bonde-components/0.0.2-alpha.6_4c2989364b476e9b13a38ab6e691709a:
+  /bonde-components/0.0.2-alpha.8_4c2989364b476e9b13a38ab6e691709a:
     dependencies:
       final-form: 4.18.7
       react: 16.13.1
@@ -3823,7 +3823,7 @@ packages:
       react-dom: '*'
       typescript: '*'
     resolution:
-      integrity: sha512-t+8bc9+PU2kyvWdlZ58lId84cHRVVHjuvesNEGQXOug8YSAxTVixgVRGRMxQ4HkQNeUuRCvlNJigXSysRAmh4A==
+      integrity: sha512-NAQqMmzQgaZUaj5+0iwSUXuY4oWiHkfgRRSN1QibIFYuYYXdfH7zTH3BqvhwtIckdxi7mb+VXnp2iL54ErV8Cw==
   /bonde-core-tools/0.1.1-0_6c2bc62ec9c1b4526c44154a68bc526b:
     dependencies:
       '@apollo/react-hooks': 3.1.3_d1d6a902f85027ce420e118dc589617d
