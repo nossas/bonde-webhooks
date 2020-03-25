@@ -27,7 +27,7 @@
     "typescript": "^3.6.4"
   },
   "scripts": {
-    "start": "serve -s build",
+    "start": "DEBUG=bonde-auth-api node dist/index.js",
     "dev": "DEBUG=bonde-auth-api tsc-watch --onSuccess \"node dist/index.js\"",
     "clean": "rm -rf node_modules dist",
     "build": "tsc",
