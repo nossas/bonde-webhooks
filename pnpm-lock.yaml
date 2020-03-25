@@ -126,16 +126,20 @@ importers:
       '@types/react-dom': 16.9.5
       '@types/react-router': 5.1.4
       '@types/react-router-dom': 5.1.3
-      bonde-components: 0.0.2-alpha.2_react-dom@16.13.1+react@16.13.1
+      '@types/styled-components': 5.0.1
+      bonde-components: 0.0.2-alpha.6_4c2989364b476e9b13a38ab6e691709a
       bonde-core-tools: 0.1.1-0_6c2bc62ec9c1b4526c44154a68bc526b
+      final-form: 4.18.7
       graphql-tag: 2.10.3
       history: 4.10.1
       react: 16.13.1
       react-dom: 16.13.1_react@16.13.1
+      react-final-form: 6.3.5_b9b3b641c484db93c7b63dd1d28c44dc
       react-router: 5.1.2_react@16.13.1
       react-router-dom: 5.1.2_react@16.13.1
       react-scripts: 3.4.0_typescript@3.7.5
       serve: 11.3.0
+      styled-components: 5.0.1_8f7d443d2407229b91fbc1ce8596fcc4
       typescript: 3.7.5
     specifiers:
       '@testing-library/jest-dom': ^4.2.4
@@ -148,16 +152,20 @@ importers:
       '@types/react-dom': ^16.9.0
       '@types/react-router': ^5.1.4
       '@types/react-router-dom': ^5.1.3
-      bonde-components: 0.0.2-alpha.2
+      '@types/styled-components': ^5.0.1
+      bonde-components: 0.0.2-alpha.6
       bonde-core-tools: 0.1.1-0
+      final-form: ^4.18.7
       graphql-tag: ^2.10.3
       history: ^4.10.1
       react: ^16.13.1
       react-dom: ^16.13.1
+      react-final-form: ^6.3.5
       react-router: ^5.1.2
       react-router-dom: ^5.1.2
       react-scripts: 3.4.0
       serve: ^11.3.0
+      styled-components: ^5.0.1
       typescript: ~3.7.2
   packages/webhook:
     dependencies:
@@ -2432,6 +2440,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-wLD/Aq2VggCJXSjxEwrMafIP51Z+13H78nXIX0ABEuIGhmB5sNGbR113MOKo+yfw+RDo1ZU3DM6yfnnRF/+ouw==
+  /@types/hoist-non-react-statics/3.3.1:
+    dependencies:
+      '@types/react': 16.9.25
+      hoist-non-react-statics: 3.3.2
+    dev: false
+    resolution:
+      integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
   /@types/istanbul-lib-coverage/2.0.1:
     resolution:
       integrity: sha512-hRJD2ahnnpLgsj6KWMYSrmXkM3rm2Dl1qkx6IOFD5FnuNPXJIG5L0dhgKXCYTRMGzU4n0wImQ/xfmRc4POUFlg==
@@ -2499,6 +2514,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-BX6RQ8s9D+2/gDhxrj8OW+YD4R+8hj7FEM/OJHGNR0KipE1h1mSsf39YeyC81qafkq+N3rU3h3RFbLSwE5VqUg==
+  /@types/react-native/0.61.23:
+    dependencies:
+      '@types/react': 16.9.25
+    dev: false
+    resolution:
+      integrity: sha512-upHmySsrVBDBokWWhYIKkKnpvadsHdioSjbBTu4xl7fjN0yb94KR5ngUOBXsyqAYqQzF+hP6qpvobG9M7Jr6hw==
   /@types/react-router-dom/5.1.3:
     dependencies:
       '@types/history': 4.7.5
@@ -2541,6 +2562,15 @@ packages:
   /@types/stack-utils/1.0.1:
     resolution:
       integrity: sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
+  /@types/styled-components/5.0.1:
+    dependencies:
+      '@types/hoist-non-react-statics': 3.3.1
+      '@types/react': 16.9.25
+      '@types/react-native': 0.61.23
+      csstype: 2.6.9
+    dev: false
+    resolution:
+      integrity: sha512-1yRYO1dAE2MGEuYKF1yQFeMdoyerIQn6ZDnFFkxZamcs3rn8RQVn98edPsTROAxbTz81tqnVN4BJ3Qs1cm/tKg==
   /@types/superagent/4.1.7:
     dependencies:
       '@types/cookiejar': 2.1.1
@@ -3781,6 +3811,19 @@ packages:
       react-dom: '*'
     resolution:
       integrity: sha512-wUkjOaH7QU1524g7L+8W5gJV1qrwMEj5jtZHl7ntNtpsQDtGgAWG6t/yCulOCwiDIFIOXk1kg/hJeonDlCPW9g==
+  /bonde-components/0.0.2-alpha.6_4c2989364b476e9b13a38ab6e691709a:
+    dependencies:
+      final-form: 4.18.7
+      react: 16.13.1
+      react-final-form: 6.3.5_b9b3b641c484db93c7b63dd1d28c44dc
+      styled-components: 5.0.1_8f7d443d2407229b91fbc1ce8596fcc4
+    dev: false
+    peerDependencies:
+      react: '>=16'
+      react-dom: '*'
+      typescript: '*'
+    resolution:
+      integrity: sha512-t+8bc9+PU2kyvWdlZ58lId84cHRVVHjuvesNEGQXOug8YSAxTVixgVRGRMxQ4HkQNeUuRCvlNJigXSysRAmh4A==
   /bonde-core-tools/0.1.1-0_6c2bc62ec9c1b4526c44154a68bc526b:
     dependencies:
       '@apollo/react-hooks': 3.1.3_d1d6a902f85027ce420e118dc589617d
@@ -6102,6 +6145,12 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==
+  /final-form/4.18.7:
+    dependencies:
+      '@babel/runtime': 7.9.2
+    dev: false
+    resolution:
+      integrity: sha512-XdlYYGDcoUcKKVzRJxLg8N/ZG3wVLZvhO7K7PKQWVMjCiIUWdmtBwApw2NFS4P7RJvg8OdF73qGXhhE3K5PuDQ==
   /finalhandler/1.1.2:
     dependencies:
       debug: 2.6.9
@@ -10626,6 +10675,21 @@ packages:
     dev: false
     resolution:
       integrity: sha512-TAv1KJFh3RhqxNvhzxj6LeT5NWklP6rDr2a0jaTfsZ5wSZWHOGeqQyejUp3xxLfPt2UpyJEcVQB/zyPcmonNFA==
+  /react-final-form/6.3.5_b9b3b641c484db93c7b63dd1d28c44dc:
+    dependencies:
+      '@babel/runtime': 7.9.2
+      final-form: 4.18.7
+      react: 16.13.1
+      ts-essentials: 5.0.0_typescript@3.7.5
+      typescript: 3.7.5
+    dev: false
+    peerDependencies:
+      final-form: ^4.16.1
+      react: ^16.8.0
+      typescript: '*'
+    requiresBuild: true
+    resolution:
+      integrity: sha512-btqEp1+n1WO4bUDopBdvUoIuoGHf91n/EOJg0QU5YjhX9CK+4RIsBI0M41lmyT3H6hWv6NELdX5n5zBJyOIXoA==
   /react-is/16.13.1:
     resolution:
       integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
@@ -11918,6 +11982,7 @@ packages:
       react: 16.13.1
       react-dom: 16.13.1_react@16.13.1
       shallowequal: 1.1.0
+      styled-components: 5.0.1_8f7d443d2407229b91fbc1ce8596fcc4
       supports-color: 5.5.0
     dev: false
     peerDependencies:
@@ -12232,6 +12297,14 @@ packages:
       punycode: 2.1.1
     resolution:
       integrity: sha1-qLE/1r/SSJUZZ0zN5VujaTtwbQk=
+  /ts-essentials/5.0.0_typescript@3.7.5:
+    dependencies:
+      typescript: 3.7.5
+    dev: false
+    peerDependencies:
+      typescript: '>=3.7.0'
+    resolution:
+      integrity: sha512-ftKWOm6Jq+/UCBekDfxUjLODEd5XGN2EM/+TIQV9LJ5xSV12je4GqdRyv7pXXGGYmEt/nQa6F00xTWYJ5PMjIQ==
   /ts-invariant/0.4.4:
     dependencies:
       tslib: 1.11.1
