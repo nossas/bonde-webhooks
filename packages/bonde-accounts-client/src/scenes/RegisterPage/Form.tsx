@@ -31,6 +31,7 @@ const RegisterForm = ({ to }: any) => {
       <FinalForm
         initialValues={{ input: { email, invitation_code: code } }}
         onSubmit={async (values: any) => {
+          console.log('values', values);
           try {
             const { data } = await registerUser({ variables: values })
             
@@ -45,7 +46,7 @@ const RegisterForm = ({ to }: any) => {
       >
         {({ handleSubmit, submitting }) => (
           <Form onSubmit={handleSubmit}>
-            <Container>
+            <Container column>
               <InputField
                 name='input.first_name'
                 label='Nome'
@@ -56,7 +57,7 @@ const RegisterForm = ({ to }: any) => {
                 name='input.last_name'
                 label='Sobrenome'
                 placeholder='Seu sobrenome'
-                validate={required('Informe seu sobrenome')}
+                onBlur={required('Informe seu sobrenome')}
               />
             </Container>
             <InputField
@@ -75,7 +76,7 @@ const RegisterForm = ({ to }: any) => {
                 min(6, 'Minimo 6 catacteres')
               )}
             />
-            <Container>
+            <Container reverse>
               <LinkStyled to='/auth/login' component={Link}>Já tenho conta</LinkStyled>
               <Button type='submit' disabled={submitting}>Partiu</Button>
             </Container>

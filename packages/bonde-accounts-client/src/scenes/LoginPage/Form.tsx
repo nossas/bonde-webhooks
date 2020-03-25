@@ -34,7 +34,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) =>
           type='password'
           validate={required('Informe sua senha')}
         />
-        <Container>
+        <Container reverse>
           <LinkStyled component={Link} to='/auth/reset-password'>Esqueci a senha</LinkStyled>
           <Button type='submit' disabled={submitting}>Partiu</Button>
         </Container>

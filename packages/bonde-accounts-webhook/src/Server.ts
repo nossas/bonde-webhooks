@@ -15,7 +15,7 @@ class Server {
   private dbg: Debugger
 
   constructor() {
-    this.dbg = debug('bonde-auth-webhook')
+    this.dbg = debug(process.env.DEBUG)
   }
 
   private health = async (req: any, res: any) => {

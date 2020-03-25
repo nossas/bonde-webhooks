@@ -1,5 +1,5 @@
 {
-  "name": "bonde-auth-api",
+  "name": "bonde-accounts-api",
   "dependencies": {
     "@types/debug": "^4.1.5",
     "@types/dotenv": "^6.1.1",
@@ -27,8 +27,8 @@
     "typescript": "^3.6.4"
   },
   "scripts": {
-    "start": "DEBUG=bonde-auth-api node dist/index.js",
-    "dev": "DEBUG=bonde-auth-api tsc-watch --onSuccess \"node dist/index.js\"",
+    "start": "DEBUG=bonde-accounts-api node dist/index.js",
+    "dev": "DEBUG=bonde-accounts-api tsc-watch --onSuccess \"node dist/index.js\"",
     "clean": "rm -rf node_modules dist",
     "build": "tsc",
     "lint": "eslint . --ext js,ts,tsx --fix"

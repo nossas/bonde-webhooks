@@ -1,5 +1,5 @@
 {
-  "name": "client-auth",
+  "name": "bonde-accounts-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

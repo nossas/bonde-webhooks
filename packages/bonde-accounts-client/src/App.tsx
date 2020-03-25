@@ -26,12 +26,12 @@ const App = () => {
         <SessionRedirect loading={TextLoading} paths={['/auth/login']} to={appUrl}>
           <BaseLayout>
             <Route exact path='/'>
-              <Redirect to='/auth/login' />
+              <Redirect to='/login' />
             </Route>
-            <Route exact path='/auth/login'>
+            <Route exact path='/login'>
               <LoginPage to={appUrl} />
             </Route>
-            <Route exact path='/auth/register'>
+            <Route exact path='/register'>
               <RegisterPage to={appUrl} />
             </Route>
           </BaseLayout>

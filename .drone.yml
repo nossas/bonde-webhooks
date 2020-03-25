@@ -15,7 +15,7 @@ pipeline:
   
   docker-staging-publish:
     image: plugins/docker
-    repo: nossas/bonde-auth
+    repo: nossas/bonde-accounts
     group: publishing
     secrets: [ docker_username, docker_password ]
     tags:
@@ -29,9 +29,9 @@ pipeline:
   webhook-staging-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
-    service: auth/webhook
+    service: accounts/webhook
     group: deploying
-    docker_image: nossas/bonde-auth:${DRONE_BRANCH/\//-}
+    docker_image: nossas/bonde-accounts:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
@@ -42,9 +42,9 @@ pipeline:
   api-staging-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
-    service: auth/api
+    service: accounts/api
     group: deploying
-    docker_image: nossas/bonde-auth:${DRONE_BRANCH/\//-}
+    docker_image: nossas/bonde-accounts:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
@@ -55,9 +55,9 @@ pipeline:
   client-staging-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
-    service: auth/client
+    service: accounts/client
     group: deploying
-    docker_image: nossas/bonde-auth:${DRONE_BRANCH/\//-}
+    docker_image: nossas/bonde-accounts:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]

@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 import { Link as LinkStyled } from 'bonde-components';
 
-const Container = styled.div`
+interface ContainerProps {
+  reverse?: boolean;
+  column?: boolean;
+};
+
+const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,7 +21,16 @@ const Container = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
-    flex-direction: column-reverse;
+    ${props => props.column && `
+      flex-direction: column;
+      
+      > div {
+        flex-grow: 1;
+        margin: 0;
+        width: 100%;
+      }
+    `}
+    ${props => props.reverse && `flex-direction: column-reverse;`}
 
     ${LinkStyled}, button {
       width: 100%;
@@ -24,9 +38,14 @@ const Container = styled.div`
     }
 
     ${LinkStyled} {
-      padding: 10px 0;
+      padding: 20px 0;
     }
   }
 `;
+
+Container.defaultProps = {
+  column: false,
+  reverse: false
+};
 
 export default Container;

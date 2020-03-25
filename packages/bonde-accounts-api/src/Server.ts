@@ -15,28 +15,28 @@ const schema = makeExecutableSchema({
 })
 
 class Server {
-  private server = Express().use(Express.json())
+  private server = Express().use(Express.json());
 
-  private dbg: Debugger
+  private dbg: Debugger;
 
   constructor() {
-    this.dbg = debug('bonde-auth-api')
+    this.dbg = debug(process.env.DEBUG);
   }
 
   private health = async (req: any, res: any) => {
-    res.status(200).json({ status: 'running' })
+    res.status(200).json({ status: 'running' });
   }
 
   start = () => {
-    const { PORT, HOST } = process.env
+    const { PORT, HOST } = process.env;
     this.server
       .get('/', this.health.bind(this))
       .use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
       .use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
       .listen(Number(PORT), '0.0.0.0', () => {
         this.dbg(`API Auth Server listen on ${HOST}:${PORT}`)
-      })
-  }
-}
+      });
+  };
+};
 
 export default Server

@@ -11,6 +11,7 @@ const BaseStyled = styled.div`
   
   @media only screen and (max-width: 768px) {
     flex-direction: column;
+    justify-content: center;
   }
 `;
 
@@ -21,9 +22,9 @@ interface WrapperStyledProps {
 
 const WrapperStyled = styled.div<WrapperStyledProps>`
   display: flex;
-  padding: 0 10%;
   flex-direction: column;
   justify-content: center;
+  padding: 0 180px;
 
   ${props => props.background && `
     background: url('${props.background}') no-repeat;
@@ -40,6 +41,8 @@ const WrapperStyled = styled.div<WrapperStyledProps>`
   }
 
   @media only screen and (max-width: 768px) {
+    padding: 0 20px;
+
     ${props => props.hide === 'mobile' && `
       display: none;
     `}
