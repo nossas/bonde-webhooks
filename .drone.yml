@@ -1,7 +1,7 @@
 pipeline:
   ## Build and Tests
   staging-build:
-    image: node:12
+    image: node:12-alpine
     environment:
       - REACT_APP_HASURA_API_URL=https://api-graphql.staging.bonde.org/v1/graphql
       - REACT_APP_ADMIN_URL=https://admin-canary.staging.bonde.org/admin

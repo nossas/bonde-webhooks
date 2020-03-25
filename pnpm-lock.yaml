@@ -77,7 +77,7 @@ importers:
       apollo-link-http: 1.5.16_graphql@14.6.0
       apollo-server-express: 1.4.0_graphql@14.6.0
       apollo-utilities: 1.3.3_graphql@14.6.0
-      bcrypt: 3.0.8
+      bcrypt: 4.0.1
       body-parser: 1.19.0
       debug: 4.1.1
       dotenv: 8.2.0
@@ -102,7 +102,7 @@ importers:
       apollo-link-http: ^1.5.16
       apollo-server-express: '1'
       apollo-utilities: ^1.3.2
-      bcrypt: ^3.0.6
+      bcrypt: 4.0.1
       body-parser: ^1.19.0
       debug: ^4.1.1
       dotenv: ^8.1.0
@@ -3094,16 +3094,16 @@ packages:
       tweetnacl: 0.14.5
     resolution:
       integrity: sha1-pDAdOJtqQ/m2f/PKEaP2Y342Dp4=
-  /bcrypt/3.0.8:
+  /bcrypt/4.0.1:
     dependencies:
-      nan: 2.14.0
+      node-addon-api: 2.0.0
       node-pre-gyp: 0.14.0
     dev: false
     engines:
-      node: '>= 6.0.0'
+      node: '>= 10.0.0'
     requiresBuild: true
     resolution:
-      integrity: sha512-jKV6RvLhI36TQnPDvUFqBEnGX9c8dRRygKxCZu7E+MgLfKZbmmXL8a7/SFFOyHoPNX9nV81cKRC5tbQfvEQtpw==
+      integrity: sha512-hSIZHkUxIDS5zA2o00Kf2O5RfVbQ888n54xQoF/eIaquU4uaLxK8vhhBdktd0B3n2MjkcAWzv4mnhogykBKOUQ==
   /big.js/5.2.2:
     dev: false
     resolution:
@@ -8114,6 +8114,7 @@ packages:
     resolution:
       integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
   /nan/2.14.0:
+    optional: true
     resolution:
       integrity: sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
   /nanomatch/1.2.13:
@@ -8171,6 +8172,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-ehY/mVQCf9BL0gKfsJBvFJen+1V//U+0HQMPrWct40ixE4jnv0bfvxDbWtAHL9EcaPEOJHVVYKoQn1TlZUB8Tw==
+  /node-addon-api/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-ASCL5U13as7HhOExbT6OlWJJUV/lLzL2voOSP1UVehpRD8FbSrSDjfScK/KwAvVTI5AS6r4VwbOMlIqtvRidnA==
   /node-cleanup/2.1.2:
     dev: true
     resolution:
@@ -12249,7 +12254,7 @@ packages:
       integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==
   /wide-align/1.1.3:
     dependencies:
-      string-width: 2.1.1
+      string-width: 1.0.2
     dev: false
     resolution:
       integrity: sha512-QGkOQc8XL6Bt5PwnsExKBPuMKBxnGxWWW3fU55Xt4feHozMUhdUMaBCk290qpm/wG5u/RSKzwdAC4i51YigihA==
