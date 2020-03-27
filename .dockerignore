@@ -1,2 +1,2 @@
 .env
-packages/*/.env
+**/.env
