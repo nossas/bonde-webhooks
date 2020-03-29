@@ -6,6 +6,7 @@ import md5 from 'md5'
 import urljoin from 'url-join'
 import * as InvitationsAPI from './graphql/invitations'
 import * as NotificationsAPI from './graphql/notifications'
+import * as UsersAPI from './graphql/users'
 
 dotenv.config()
 
@@ -46,17 +47,25 @@ class Server {
   private invitations = async (req: any, res: any) => {
     this.dbg(`Start invite to community.`)
     const { id, community_id, user_id, email, role, created_at, callback_url } = req.body.event.data.new
-    const code = md5(`${community_id}-${user_id}-${email}-${role}-${created_at}`)
-    const invite = await InvitationsAPI.update(id, code)
-
-    const invite_url = urljoin(callback_url, `?code=${invite.code}&email=${invite.email}`)
-
-    const input = {
-      email_to: email,
-      email_from: 'suporte@bonde.org',
-      context: { invite_url, community: invite.community }
+    const input = { email_to: email, email_from: 'suporte@bonde.org', context: {} }
+    
+    const user = await UsersAPI.find(email)
+    if (!!user) {
+      this.dbg(`Users exists, create relationship with Community`)
+      const communityUsers = { user_id: user.id, community_id, role }
+      await UsersAPI.relationship(communityUsers)
+      const invite = await InvitationsAPI.update(id, { expired: true })
+      
+      input.context = { invite_url: 'https://admin-canary.bonde.org', community: invite.community }
+    } else {
+      this.dbg(`User does not exists`)
+      const code = md5(`${community_id}-${user_id}-${email}-${role}-${created_at}`)
+      const invite = await InvitationsAPI.update(id, { code })
+      
+      const invite_url = urljoin(callback_url, `?code=${invite.code}&email=${invite.email}`)
+      input.context = { invite_url, community: invite.community }
     }
-
+  
     this.dbg(`sending mail...`)
     await NotificationsAPI.send(input, { label: 'invite', locale: 'pt-BR' })
 
