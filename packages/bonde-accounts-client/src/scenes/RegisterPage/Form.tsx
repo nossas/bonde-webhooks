@@ -1,9 +1,8 @@
 import React from 'react';
 import gql from 'graphql-tag'
 import { useLocation, Link } from 'react-router-dom';
-import { Form as FinalForm } from 'react-final-form';
 import { useSession, useMutation } from 'bonde-core-tools';
-import { Button, Form, InputField, Header, Link as LinkStyled } from 'bonde-components';
+import { Button, ConnectedForm, InputField, Header, Link as LinkStyled } from 'bonde-components';
 import { composeValidators, required, min } from '../../validations';
 import Container from '../../components/Container';
 
@@ -28,24 +27,22 @@ const RegisterForm = ({ to }: any) => {
   return (
     <>
       <Header.h1>O Bonde tá na área! Chega mais.</Header.h1>
-      <FinalForm
+      <ConnectedForm
         initialValues={{ input: { email, invitation_code: code } }}
         onSubmit={async (values: any) => {
-          console.log('values', values);
           try {
-            const { data } = await registerUser({ variables: values })
+            const { data } = await registerUser({ variables: values });
             
-            login(data.register)
-              .then(() => {
-                window.location.href = to;
-              })
+            login(data.register).then(() => {
+              window.location.href = to;
+            });
           } catch (err) {
             console.log('RegisterFailed', err)
           }
         }}
       >
-        {({ handleSubmit, submitting }) => (
-          <Form onSubmit={handleSubmit}>
+        {({ submitting }) => (
+          <>
             <Container column>
               <InputField
                 name='input.first_name'
@@ -80,9 +77,9 @@ const RegisterForm = ({ to }: any) => {
               <LinkStyled to='/auth/login' component={Link}>Já tenho conta</LinkStyled>
               <Button type='submit' disabled={submitting}>Partiu</Button>
             </Container>
-          </Form>
+          </>
         )}
-      </FinalForm>
+      </ConnectedForm>
     </>
   );
 };

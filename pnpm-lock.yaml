@@ -1,6 +1,7 @@
 importers:
   .:
     dependencies:
+      bonde-components: 0.0.2-alpha.13_typescript@3.8.3
       dotenv: 8.2.0
       node-fetch: 2.6.0
       pnpm: 4.12.0
@@ -47,6 +48,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^2.3.3
       '@typescript-eslint/parser': ^2.3.3
       babel-eslint: 10.0.3
+      bonde-components: 0.0.2-alpha.13
       dotenv: ^8.1.0
       eslint: ^6.8.0
       eslint-config-standard: ^14.1.0
@@ -127,7 +129,7 @@ importers:
       '@types/react-router': 5.1.4
       '@types/react-router-dom': 5.1.3
       '@types/styled-components': 5.0.1
-      bonde-components: 0.0.2-alpha.8_4c2989364b476e9b13a38ab6e691709a
+      bonde-components: 0.0.2-alpha.14_4c2989364b476e9b13a38ab6e691709a
       bonde-core-tools: 0.1.1-0_6c2bc62ec9c1b4526c44154a68bc526b
       final-form: 4.18.7
       graphql-tag: 2.10.3
@@ -153,7 +155,7 @@ importers:
       '@types/react-router': ^5.1.4
       '@types/react-router-dom': ^5.1.3
       '@types/styled-components': ^5.0.1
-      bonde-components: 0.0.2-alpha.8
+      bonde-components: 0.0.2-alpha.14
       bonde-core-tools: 0.1.1-0
       final-form: ^4.18.7
       graphql-tag: ^2.10.3
@@ -3151,17 +3153,18 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-dhEPs72UPbDnAQJ9ZKMNTP6ptJaionhP5cBb541nXPlW60Jepo9RV/a4fX4XWW9CuFNK22krhrj1+rgzifNCsw==
-  /bonde-components/0.0.2-alpha.2_react-dom@16.13.1+react@16.13.1:
+  /bonde-components/0.0.2-alpha.13_typescript@3.8.3:
     dependencies:
-      react: 16.13.1
-      styled-components: 5.0.1_8f7d443d2407229b91fbc1ce8596fcc4
+      final-form: 4.18.7
+      react-final-form: 6.3.5_a10fcbd5aca528fd1a69db74316716df
+      styled-components: 5.0.1_styled-components@5.0.1
     dev: false
     peerDependencies:
       react: '>=16'
-      react-dom: '*'
+      typescript: '*'
     resolution:
-      integrity: sha512-wUkjOaH7QU1524g7L+8W5gJV1qrwMEj5jtZHl7ntNtpsQDtGgAWG6t/yCulOCwiDIFIOXk1kg/hJeonDlCPW9g==
-  /bonde-components/0.0.2-alpha.8_4c2989364b476e9b13a38ab6e691709a:
+      integrity: sha512-6VHldp0trCgGxkHdL2koGkpTMWNimYbQPZoLYGgl0i2N44f3xvBOexJxEKNW32DUSSdK0UOaYn+gvZJppFkdwg==
+  /bonde-components/0.0.2-alpha.14_4c2989364b476e9b13a38ab6e691709a:
     dependencies:
       final-form: 4.18.7
       react: 16.13.1
@@ -3173,7 +3176,17 @@ packages:
       react-dom: '*'
       typescript: '*'
     resolution:
-      integrity: sha512-NAQqMmzQgaZUaj5+0iwSUXuY4oWiHkfgRRSN1QibIFYuYYXdfH7zTH3BqvhwtIckdxi7mb+VXnp2iL54ErV8Cw==
+      integrity: sha512-3XvL9yVXZY7JOpH+pVn4ZlQRMDzU2KLdsnNX+zeItWvfgAwR8qG3Pex+IG8r7E7hDDxzj8k4N3PMP2thzDIoGQ==
+  /bonde-components/0.0.2-alpha.2_react-dom@16.13.1+react@16.13.1:
+    dependencies:
+      react: 16.13.1
+      styled-components: 5.0.1_8f7d443d2407229b91fbc1ce8596fcc4
+    dev: false
+    peerDependencies:
+      react: '>=16'
+      react-dom: '*'
+    resolution:
+      integrity: sha512-wUkjOaH7QU1524g7L+8W5gJV1qrwMEj5jtZHl7ntNtpsQDtGgAWG6t/yCulOCwiDIFIOXk1kg/hJeonDlCPW9g==
   /bonde-core-tools/0.1.1-0_6c2bc62ec9c1b4526c44154a68bc526b:
     dependencies:
       '@apollo/react-hooks': 3.1.3_d1d6a902f85027ce420e118dc589617d
@@ -10030,6 +10043,19 @@ packages:
     dev: false
     resolution:
       integrity: sha512-TAv1KJFh3RhqxNvhzxj6LeT5NWklP6rDr2a0jaTfsZ5wSZWHOGeqQyejUp3xxLfPt2UpyJEcVQB/zyPcmonNFA==
+  /react-final-form/6.3.5_a10fcbd5aca528fd1a69db74316716df:
+    dependencies:
+      '@babel/runtime': 7.9.2
+      final-form: 4.18.7
+      ts-essentials: 5.0.0_typescript@3.8.3
+    dev: false
+    peerDependencies:
+      final-form: ^4.16.1
+      react: ^16.8.0
+      typescript: '*'
+    requiresBuild: true
+    resolution:
+      integrity: sha512-btqEp1+n1WO4bUDopBdvUoIuoGHf91n/EOJg0QU5YjhX9CK+4RIsBI0M41lmyT3H6hWv6NELdX5n5zBJyOIXoA==
   /react-final-form/6.3.5_b9b3b641c484db93c7b63dd1d28c44dc:
     dependencies:
       '@babel/runtime': 7.9.2
@@ -11347,6 +11373,26 @@ packages:
       styled-components: '*'
     resolution:
       integrity: sha512-E0xKTRIjTs4DyvC1MHu/EcCXIj6+ENCP8hP01koyoADF++WdBUOrSGwU1scJRw7/YaYOhDvvoad6VlMG+0j53A==
+  /styled-components/5.0.1_styled-components@5.0.1:
+    dependencies:
+      '@babel/helper-module-imports': 7.8.3
+      '@babel/traverse': 7.9.0
+      '@emotion/is-prop-valid': 0.8.8
+      '@emotion/stylis': 0.8.5
+      '@emotion/unitless': 0.7.5
+      babel-plugin-styled-components: 1.10.7_styled-components@5.0.1
+      css-to-react-native: 3.0.0
+      hoist-non-react-statics: 3.3.2
+      shallowequal: 1.1.0
+      supports-color: 5.5.0
+    dev: false
+    peerDependencies:
+      react: '>= 16.8.0'
+      react-dom: '>= 16.8.0'
+      react-is: '>= 16.8.0'
+      styled-components: '*'
+    resolution:
+      integrity: sha512-E0xKTRIjTs4DyvC1MHu/EcCXIj6+ENCP8hP01koyoADF++WdBUOrSGwU1scJRw7/YaYOhDvvoad6VlMG+0j53A==
   /stylehacks/4.0.3:
     dependencies:
       browserslist: 4.11.0
@@ -11655,6 +11701,14 @@ packages:
   /ts-essentials/5.0.0_typescript@3.7.5:
     dependencies:
       typescript: 3.7.5
+    dev: false
+    peerDependencies:
+      typescript: '>=3.7.0'
+    resolution:
+      integrity: sha512-ftKWOm6Jq+/UCBekDfxUjLODEd5XGN2EM/+TIQV9LJ5xSV12je4GqdRyv7pXXGGYmEt/nQa6F00xTWYJ5PMjIQ==
+  /ts-essentials/5.0.0_typescript@3.8.3:
+    dependencies:
+      typescript: 3.8.3
     dev: false
     peerDependencies:
       typescript: '>=3.7.0'
