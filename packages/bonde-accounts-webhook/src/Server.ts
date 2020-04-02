@@ -46,7 +46,7 @@ class Server {
 
   private invitations = async (req: any, res: any) => {
     this.dbg(`Start invite to community.`)
-    const { id, community_id, user_id, email, role, created_at, callback_url } = req.body.event.data.new
+    const { id, community_id, user_id, email, role, created_at } = req.body.event.data.new
     const input = { email_to: email, email_from: 'suporte@bonde.org', context: {} }
     
     const user = await UsersAPI.find(email)
@@ -54,15 +54,18 @@ class Server {
       this.dbg(`Users exists, create relationship with Community`)
       const communityUsers = { user_id: user.id, community_id, role }
       await UsersAPI.relationship(communityUsers)
+
       const invite = await InvitationsAPI.update(id, { expired: true })
+      const loginUrl = process.env.ACCOUNTS_LOGIN_URL || 'http://accounts.bonde.devel:5000/login'
       
-      input.context = { invite_url: 'https://admin-canary.bonde.org', community: invite.community }
+      input.context = { invite_url: loginUrl, community: invite.community }
     } else {
       this.dbg(`User does not exists`)
       const code = md5(`${community_id}-${user_id}-${email}-${role}-${created_at}`)
       const invite = await InvitationsAPI.update(id, { code })
+      const registerUrl = process.env.ACCOUNTS_REGISTER_URL || 'http://accounts.bonde.devel:5000/register'
       
-      const invite_url = urljoin(callback_url, `?code=${invite.code}&email=${invite.email}`)
+      const invite_url = urljoin(registerUrl, `?code=${invite.code}&email=${invite.email}`)
       input.context = { invite_url, community: invite.community }
     }
   
