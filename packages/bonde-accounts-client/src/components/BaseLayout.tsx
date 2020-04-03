@@ -46,6 +46,7 @@ interface WrapperStyledProps {
 };
 
 const WrapperStyled = styled.div<WrapperStyledProps>`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;

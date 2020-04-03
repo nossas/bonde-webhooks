@@ -3,14 +3,16 @@ import {
   Button,
   Form,
   InputField,
-  Link as LinkStyled
+  Link as LinkStyled,
+  Validators
 } from 'bonde-components';
 import { Form as FinalForm } from 'react-final-form';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import Container from '../../components/Container';
-import { composeValidators, required, isEmail } from '../../validations';
+
+const { composeValidators, required, isEmail, min } = Validators;
 
 interface LoginFormProps {
   onSubmit: any;
@@ -37,7 +39,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
             label={t('fields.password.label')}
             placeholder={t('fields.password.placeholder')}
             type='password'
-            validate={required(t('fields.password.errors.isEmptyLogin'))}
+            validate={composeValidators(
+              required(t('fields.password.errors.isEmptyLogin')),
+              min(6, t('fields.password.errors.min'))
+            )}
           />
           <Container reverse>
             <LinkStyled component={Link} to='/auth/reset-password'>

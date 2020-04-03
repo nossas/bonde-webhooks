@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import { useLocation, Link } from 'react-router-dom';
 import { useSession, useMutation } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
-import { Button, ConnectedForm, InputField, Header, Link as LinkStyled, Hint } from 'bonde-components';
-import { composeValidators, required, min } from '../../validations';
+import { Button, ConnectedForm, InputField, Header, Link as LinkStyled, Hint, Validators } from 'bonde-components';
 import Container from '../../components/Container';
+
+const { composeValidators, required, min } = Validators;
 
 const registerUserMutation = gql`
   mutation Register ($input: RegisterInput!) {
