@@ -2,8 +2,8 @@ import * as React from 'react';
 import { BondeSessionProvider } from 'bonde-core-tools';
 import { Router, Route, Redirect } from "react-router-dom";
 import { createBrowserHistory } from 'history';
+import { Loading } from 'bonde-components';
 import BaseLayout from './components/BaseLayout';
-// import RegisterForm from './components/RegisterForm';
 import SessionRedirect from './components/SessionRedirect';
 import TextLoading from './components/TextLoading';
 import LoginPage from './scenes/LoginPage';
@@ -17,7 +17,10 @@ const config = {
 };
 
 const LoadingI18n = () => (
-  <div>Carregando tradução...</div>
+  <Loading
+    fullsize
+    message='Carregando tradução...'
+  />
 )
 
 const App = React.memo(() => {
