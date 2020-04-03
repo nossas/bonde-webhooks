@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { BondeSessionProvider } from 'bonde-core-tools';
 import { Router, Route, Redirect } from "react-router-dom";
 import { createBrowserHistory } from 'history';
@@ -6,7 +6,6 @@ import BaseLayout from './components/BaseLayout';
 // import RegisterForm from './components/RegisterForm';
 import SessionRedirect from './components/SessionRedirect';
 import TextLoading from './components/TextLoading';
-
 import LoginPage from './scenes/LoginPage';
 import RegisterPage from './scenes/RegisterPage';
 
@@ -17,7 +16,11 @@ const config = {
   graphqlApiUrl: process.env.REACT_APP_HASURA_API_URL || 'https://api-graphql.staging.bonde.org/v1/graphql'
 };
 
-const App = () => {
+const LoadingI18n = () => (
+  <div>Carregando tradução...</div>
+)
+
+const App = React.memo(() => {
   const appUrl = process.env.REACT_APP_ADMIN_URL || 'http://app.bonde.devel:8181';
 
   return (
@@ -39,6 +42,10 @@ const App = () => {
       </Router>
     </BondeSessionProvider>
   );
-};
+});
 
-export default App;
+export default () => (
+  <React.Suspense fallback={<LoadingI18n />}>
+    <App />
+  </React.Suspense>
+);
