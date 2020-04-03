@@ -37,7 +37,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
             label={t('fields.password.label')}
             placeholder={t('fields.password.placeholder')}
             type='password'
-            validate={required(t('fields.password.errors.isEmpty'))}
+            validate={required(t('fields.password.errors.isEmptyLogin'))}
           />
           <Container reverse>
             <LinkStyled component={Link} to='/auth/reset-password'>

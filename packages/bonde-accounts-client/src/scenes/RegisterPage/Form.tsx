@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import styled from 'styled-components';
 import { useLocation, Link } from 'react-router-dom';
 import { useSession, useMutation } from 'bonde-core-tools';
+import { useTranslation } from 'react-i18next';
 import { Button, ConnectedForm, InputField, Header, Link as LinkStyled, Hint } from 'bonde-components';
 import { composeValidators, required, min } from '../../validations';
 import Container from '../../components/Container';
@@ -25,6 +26,7 @@ const Styles = styled.div`
 `
 
 const RegisterForm = ({ to }: any) => {
+  const { t } = useTranslation('auth');
   const { search } = useLocation();
   const { login } = useSession();
   const [error, setError] = useState(undefined);
@@ -48,7 +50,7 @@ const RegisterForm = ({ to }: any) => {
               })
           } catch (err) {
             if (err && err.message && err.message.indexOf('invalid_invitation_code') !== -1) {
-              setError('Seu convite não é válido, peça um novo convite para a comunidade')
+              setError(t('form.register.token.invalid'))
               console.log('err', err)
             }
             console.log('RegisterFailed', err)
@@ -58,40 +60,43 @@ const RegisterForm = ({ to }: any) => {
         {({ submitting }) => (
           <Styles>
             {error && <Hint color='error'>{error}</Hint>}
-            <Hint color='error'>Seu convite não é válido, peça um novo convite para a comunidade</Hint>
             <Container column>
               <InputField
                 name='input.first_name'
-                label='Nome'
-                placeholder='Seu nome'
-                validate={required('Informe seu nome')}
+                label={t('fields.firstName.label')}
+                placeholder={t('fields.firstName.placeholder')}
+                validate={required(t('fields.firstName.errors.isEmpty'))}
               />
               <InputField
                 name='input.last_name'
-                label='Sobrenome'
-                placeholder='Seu sobrenome'
-                onBlur={required('Informe seu sobrenome')}
+                label={t('fields.lastName.label')}
+                placeholder={t('fields.lastName.placeholder')}
+                onBlur={required(t('fields.lastName.errors.isEmpty'))}
               />
             </Container>
             <InputField
               disabled
               name='input.email'
-              label='Email'
-              placeholder='Seu email'
+              label={t('fields.email.label')}
+              placeholder={t('fields.email.placeholder')}
             />
             <InputField
               type='password'
               name='input.password'
-              label='Senha'
-              placeholder='Sua senha'
+              label={t('fields.password.label')}
+              placeholder={t('fields.password.placeholder')}
               validate={composeValidators(
-                required('Informe uma senha'),
-                min(6, 'Minimo 6 catacteres')
+                required(t('fields.password.errors.isEmptyRegister')),
+                min(6, t('fields.password.errors.min'))
               )}
             />
             <Container reverse>
-              <LinkStyled to='/auth/login' component={Link}>Já tenho conta</LinkStyled>
-              <Button type='submit' disabled={submitting}>Partiu</Button>
+              <LinkStyled to='/auth/login' component={Link}>
+                {t('links.iHaveAccount')}
+              </LinkStyled>
+              <Button type='submit' disabled={submitting}>
+                {t('button.submit')}
+              </Button>
             </Container>
           </Styles>
         )}
