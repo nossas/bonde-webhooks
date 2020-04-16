@@ -1,5 +1,5 @@
 {
-  "name": "bonde-auth-webhook",
+  "name": "bonde-accounts-webhook",
   "dependencies": {
     "@types/debug": "^4.1.5",
     "@types/dotenv": "^6.1.1",
@@ -22,7 +22,8 @@
     "url-join": "^4.0.1"
   },
   "scripts": {
-    "dev": "DEBUG=bonde-auth-webhook tsc-watch --onSuccess \"node dist/index.js\"",
+    "start": "DEBUG=bonde-accounts-webhook node dist/index.js",
+    "dev": "DEBUG=bonde-accounts-webhook tsc-watch --onSuccess \"node dist/index.js\"",
     "clean": "rm -rf node_modules dist",
     "build": "tsc"
   }

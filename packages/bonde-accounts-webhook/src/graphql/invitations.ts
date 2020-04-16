@@ -17,10 +17,15 @@ export interface Invite {
   email: string
 }
 
-export const update = async (id: number, code: string): Promise<Invite> => {
+interface InviteUpdateFields {
+  code?: string;
+  expired?: boolean;
+}
+
+export const update = async (id: number, fields: InviteUpdateFields): Promise<Invite> => {
   const UpdateInvitationQuery = gql`
-    mutation UpdateInvitation ($id: Int!, $code: String!) {
-      update_invitations(where: { id: { _eq: $id }}, _set: { code: $code }) {
+    mutation UpdateInvitation ($id: Int!, $fields: invitations_set_input!) {
+      update_invitations(where: { id: { _eq: $id }}, _set: $fields) {
         returning {
 					id
 			    expired
@@ -37,7 +42,7 @@ export const update = async (id: number, code: string): Promise<Invite> => {
       }
     }
   `
-  const variables = { id, code }
+  const variables = { id, fields }
   const resp = await GraphQLAPI.mutate({ mutation: UpdateInvitationQuery, variables })
 
   return resp.data.update_invitations.returning[0]

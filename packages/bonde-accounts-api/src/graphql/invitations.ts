@@ -21,37 +21,39 @@ export interface FilterInvitation {
 }
 
 export const find = async (variables: FilterInvitation): Promise<Invite> => {
-  const expires = new Date().toISOString().substring(0, 10)
+  const expires = new Date().toISOString().substring(0, 10);
+  
+  console.log('variables', { ...variables, expires });
 
   const FilterInvitationsQuery = gql`
-		query Invitations($code: String!, $email: String!, $expires: timestamp!) {
-		  invitations(
-		    where: {
-		      _and: {
-		        code: { _eq: $code },
-		        email: { _eq: $email },
-		        expired: { _is_null: true },
-		        expires: { _gte: $expires }
-		      }
-		    }
-			) {
-				id
-		    expired
-		    expires
-		    role
-		    community {
-		      id
-		      name
-		      image
-		    }
-		  }
-		}
-	`
+    query Invitations($code: String!, $email: String!, $expires: timestamp!) {
+      invitations(
+        where: {
+          _and: {
+            code: { _eq: $code },
+            email: { _eq: $email },
+            expired: { _is_null: true },
+            expires: { _gte: $expires }
+          }
+        }
+      ) {
+        id
+        expired
+        expires
+        role
+        community {
+          id
+          name
+          image
+        }
+      }
+    }
+  `
 
   const resp = await GraphQLAPI.query({
-  	query: FilterInvitationsQuery,
-  	variables: { ...variables, expires },
-  	fetchPolicy: 'network-only'
+    query: FilterInvitationsQuery,
+    variables: { ...variables, expires },
+    fetchPolicy: 'network-only'
   })
   if (resp.data && resp.data.invitations.length > 0) {
     return resp.data.invitations[0]
@@ -64,15 +66,15 @@ export const done = async (id: number): Promise<Invite> => {
     mutation UpdateInvitation ($id: Int!) {
       update_invitations(where: { id: { _eq: $id }}, _set: { expired: true }) {
         returning {
-					id
-			    expired
-			    expires
-			    role
-			    community {
-			    	id
-			    	name
-			    	image
-			    }
+          id
+          expired
+          expires
+          role
+          community {
+            id
+            name
+            image
+          }
         }
       }
     }

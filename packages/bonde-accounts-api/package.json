@@ -1,5 +1,5 @@
 {
-  "name": "bonde-auth-api",
+  "name": "bonde-accounts-api",
   "dependencies": {
     "@types/debug": "^4.1.5",
     "@types/dotenv": "^6.1.1",
@@ -13,7 +13,7 @@
     "apollo-link-http": "^1.5.16",
     "apollo-server-express": "1",
     "apollo-utilities": "^1.3.2",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "4.0.1",
     "body-parser": "^1.19.0",
     "debug": "^4.1.1",
     "dotenv": "^8.1.0",
@@ -27,7 +27,8 @@
     "typescript": "^3.6.4"
   },
   "scripts": {
-    "dev": "DEBUG=bonde-auth-api tsc-watch --onSuccess \"node dist/index.js\"",
+    "start": "DEBUG=bonde-accounts-api node dist/index.js",
+    "dev": "DEBUG=bonde-accounts-api tsc-watch --onSuccess \"node dist/index.js\"",
     "clean": "rm -rf node_modules dist",
     "build": "tsc",
     "lint": "eslint . --ext js,ts,tsx --fix"

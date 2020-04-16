@@ -1,4 +1,5 @@
 packages:
   - '.'
-  - 'packages/webhook'
-  - 'packages/api'
+  - 'packages/bonde-accounts-api'
+  - 'packages/bonde-accounts-client'
+  - 'packages/bonde-accounts-webhook'

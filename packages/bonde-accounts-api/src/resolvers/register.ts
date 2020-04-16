@@ -18,7 +18,7 @@ export default async (root, args): Promise<JWT> => {
     email,
     first_name,
     last_name,
-    admin: false,
+    admin: true,
     encrypted_password: await bcrypt.hash(password, 9),
     community_users: {}
   }
