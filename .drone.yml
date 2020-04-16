@@ -4,7 +4,7 @@ pipeline:
     image: node:12-alpine
     environment:
       - REACT_APP_HASURA_API_URL=https://api-graphql.staging.bonde.org/v1/graphql
-      - REACT_APP_ADMIN_URL=https://admin-canary.staging.bonde.org/admin
+      - REACT_APP_ADMIN_URL=https://admin-canary.staging.bonde.org
       - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.staging.bonde.org
     commands:
       - export REACT_APP_LOCIZE_PROJECT_ID=$LOCIZE_PROJECT_ID
@@ -15,6 +15,22 @@ pipeline:
     secrets: [ locize_project_id, locize_api_key ]
     when:
       event: [push]
+
+  production-build:
+    image: node:12-alpine
+    environment:
+      - REACT_APP_HASURA_API_URL=https://api-graphql.bonde.org/v1/graphql
+      - REACT_APP_ADMIN_URL=https://admin-canary.bonde.org
+      - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.bonde.org
+    commands:
+      - export REACT_APP_LOCIZE_PROJECT_ID=$LOCIZE_PROJECT_ID
+      - export REACT_APP_LOCIZE_API_KEY=$LOCIZE_API_KEY
+      - yarn global add pnpm
+      - pnpm i
+      - pnpm m run build
+    secrets: [ locize_project_id, locize_api_key ]
+    when:
+      event: tag
   
   docker-staging-publish:
     image: plugins/docker
@@ -25,8 +41,19 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
-      event: push
+      event: [push]
+  
+  docker-production-publish:
+    image: plugins/docker
+    repo: nossas/bonde-accounts
+    group: publishing
+    secrets: [ docker_username, docker_password ]
+    tags:
+      - ${DRONE_TAG##v}
+      - latest
+    when:
+      status: success
+      event: tag
 
   ## Deploy on rancher cluster - Staging
   webhook-staging-deploy:
@@ -40,7 +67,7 @@ pipeline:
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, develop]
+      event: [push]
 
   api-staging-deploy:
     image: peloton/drone-rancher
@@ -53,7 +80,7 @@ pipeline:
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, develop]
+      event: [push]
 
   client-staging-deploy:
     image: peloton/drone-rancher
@@ -66,4 +93,55 @@ pipeline:
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, develop]
+      event: [push]
+
+  webhook-production-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: accounts/webhook
+    group: deploying
+    docker_image: nossas/bonde-accounts:${DRONE_BRANCH/\//-}
+    timeout: 360
+    confirm: true
+    secrets:
+      - source: rancher_access_key_prod
+        target: rancher_access_key
+      - source: rancher_secret_key_prod
+        target: rancher_secret_key
+    when:
+      status: success
+      event: tag
+
+  api-production-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: accounts/api
+    group: deploying
+    docker_image: nossas/bonde-accounts:${DRONE_BRANCH/\//-}
+    timeout: 360
+    confirm: true
+    secrets:
+      - source: rancher_access_key_prod
+        target: rancher_access_key
+      - source: rancher_secret_key_prod
+        target: rancher_secret_key
+    when:
+      status: success
+      event: tag
+
+  client-production-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: accounts/client
+    group: deploying
+    docker_image: nossas/bonde-accounts:${DRONE_BRANCH/\//-}
+    timeout: 360
+    confirm: true
+    secrets:
+      - source: rancher_access_key_prod
+        target: rancher_access_key
+      - source: rancher_secret_key_prod
+        target: rancher_secret_key
+    when:
+      status: success
+      event: tag
