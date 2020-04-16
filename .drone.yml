@@ -41,10 +41,9 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
-      event: push
+      event: [push]
   
-  docker-staging-publish:
+  docker-production-publish:
     image: plugins/docker
     repo: nossas/bonde-accounts
     group: publishing
@@ -68,7 +67,7 @@ pipeline:
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, develop]
+      event: [push]
 
   api-staging-deploy:
     image: peloton/drone-rancher
@@ -81,7 +80,7 @@ pipeline:
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, develop]
+      event: [push]
 
   client-staging-deploy:
     image: peloton/drone-rancher
@@ -94,7 +93,7 @@ pipeline:
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, develop]
+      event: [push]
 
   webhook-production-deploy:
     image: peloton/drone-rancher
