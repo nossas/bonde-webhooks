@@ -22,9 +22,6 @@ export interface FilterInvitation {
 
 export const find = async (variables: FilterInvitation): Promise<Invite> => {
   const expires = new Date().toISOString().substring(0, 10);
-  
-  console.log('variables', { ...variables, expires });
-
   const FilterInvitationsQuery = gql`
     query Invitations($code: String!, $email: String!, $expires: timestamp!) {
       invitations(
