@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 import styled from 'styled-components';
 import { useLocation, Link } from 'react-router-dom';
 import { useSession, useMutation } from 'bonde-core-tools';
-import { useTranslation } from 'react-i18next';
 import { Button, ConnectedForm, InputField, Header, Link as LinkStyled, Hint, Validators } from 'bonde-components';
 import Container from '../../components/Container';
 
@@ -26,8 +25,7 @@ const Styles = styled.div`
   }
 `
 
-const RegisterForm = ({ to }: any) => {
-  const { t } = useTranslation('auth');
+const RegisterForm = ({ to, t }: any) => {
   const { search } = useLocation();
   const { login } = useSession();
   const [error, setError] = useState(undefined);
@@ -41,7 +39,7 @@ const RegisterForm = ({ to }: any) => {
     <>
       <Header.h1>{t('welcome.subtitle')}</Header.h1>
       <ConnectedForm
-        initialValues={{ input: { email, invitation_code: code } }}
+        initialValues={{ input: { email, code } }}
         onSubmit={async (values: any) => {
           try {
             const { data } = await registerUser({ variables: values })
