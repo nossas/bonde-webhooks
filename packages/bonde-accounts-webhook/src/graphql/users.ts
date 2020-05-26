@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 import GraphQLAPI from '../GraphQLAPI'
 
 export interface User {
-  id: number;
-  email: string;
+  id: number
+  email: string
 }
 
 export const find = async (email: string): Promise<User | undefined> => {
@@ -23,10 +23,10 @@ export const find = async (email: string): Promise<User | undefined> => {
 }
 
 export interface CommunityUsers {
-  id?: number;
-  user_id: number;
-  community_id: number;
-  role: number;
+  id?: number
+  user_id: number
+  community_id: number
+  role: number
 }
 
 export const relationship = async (communityUsers: CommunityUsers): Promise<CommunityUsers> => {

@@ -2,11 +2,7 @@ import Express from 'express'
 import dotenv from 'dotenv'
 import debug, { Debugger } from 'debug'
 import jwt from 'jsonwebtoken'
-import md5 from 'md5'
-import urljoin from 'url-join'
-import * as InvitationsAPI from './graphql/invitations'
-import * as NotificationsAPI from './graphql/notifications'
-import * as UsersAPI from './graphql/users'
+import invitations from './handles/invitations';
 
 dotenv.config()
 
@@ -44,44 +40,12 @@ class Server {
     })
   }
 
-  private invitations = async (req: any, res: any) => {
-    this.dbg(`Start invite to community.`)
-    const { id, community_id, user_id, email, role, created_at } = req.body.event.data.new
-    const input = { email_to: email, email_from: 'suporte@bonde.org', context: {} }
-    
-    const user = await UsersAPI.find(email)
-    if (!!user) {
-      this.dbg(`Users exists, create relationship with Community`)
-      const communityUsers = { user_id: user.id, community_id, role }
-      await UsersAPI.relationship(communityUsers)
-
-      const invite = await InvitationsAPI.update(id, { expired: true })
-      const loginUrl = process.env.ACCOUNTS_LOGIN_URL || 'http://accounts.bonde.devel:5000/login'
-      
-      input.context = { invite_url: loginUrl, community: invite.community }
-    } else {
-      this.dbg(`User does not exists`)
-      const code = md5(`${community_id}-${user_id}-${email}-${role}-${created_at}`)
-      const invite = await InvitationsAPI.update(id, { code })
-      const registerUrl = process.env.ACCOUNTS_REGISTER_URL || 'http://accounts.bonde.devel:5000/register'
-      
-      const invite_url = urljoin(registerUrl, `?code=${invite.code}&email=${invite.email}`)
-      input.context = { invite_url, community: invite.community }
-    }
-  
-    this.dbg(`sending mail...`)
-    await NotificationsAPI.send(input, { label: 'invite', locale: 'pt-BR' })
-
-    this.dbg(`Invite is done!`)
-    res.status(200).json({ status: 'ok' })
-  }
-
   start = () => {
     const { PORT, HOST } = process.env
     this.server
       .get('/', this.health.bind(this))
       .get('/hasura', this.hasura.bind(this))
-      .post('/invitations', this.invitations.bind(this))
+      .post('/invitations', invitations)
       .listen(Number(PORT), '0.0.0.0', () => {
         this.dbg(`Webhook Auth Server listen on ${HOST}:${PORT}`)
       })

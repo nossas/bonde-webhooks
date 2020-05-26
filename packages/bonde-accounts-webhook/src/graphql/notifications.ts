@@ -32,6 +32,7 @@ export const findTemplate = async (filter: FilterTemplate): Promise<Template> =>
 // "reset_password_instructions"
 
 export interface Notify {
+  id?: number
   email_to: string
   email_from: string
   created_at?: string
@@ -52,6 +53,7 @@ export const send = async (input: Notify, template?: FilterTemplate): Promise<No
     mutation SendMail ($input: [notify_mail_insert_input!]!){
       insert_notify_mail(objects: $input) {
         returning {
+          id
           email_to
           email_from
           created_at

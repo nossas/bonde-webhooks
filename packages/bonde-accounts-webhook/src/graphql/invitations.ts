@@ -1,13 +1,13 @@
 import gql from 'graphql-tag'
 import GraphQLAPI from '../GraphQLAPI'
 
-export interface Community {
+interface Community {
   id: number
   name: string
   image?: string
 }
 
-export interface Invite {
+interface Invite {
   id: number
   expired?: boolean
   expires: Date
@@ -18,11 +18,11 @@ export interface Invite {
 }
 
 interface InviteUpdateFields {
-  code?: string;
-  expired?: boolean;
+  code?: string
+  expired?: boolean
 }
 
-export const update = async (id: number, fields: InviteUpdateFields): Promise<Invite> => {
+const update = async (id: number, fields: InviteUpdateFields): Promise<Invite> => {
   const UpdateInvitationQuery = gql`
     mutation UpdateInvitation ($id: Int!, $fields: invitations_set_input!) {
       update_invitations(where: { id: { _eq: $id }}, _set: $fields) {
@@ -47,3 +47,5 @@ export const update = async (id: number, fields: InviteUpdateFields): Promise<In
 
   return resp.data.update_invitations.returning[0]
 }
+
+export default { update }
