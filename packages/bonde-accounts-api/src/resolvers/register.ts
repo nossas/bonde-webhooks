@@ -5,8 +5,8 @@ import * as UsersAPI from '../graphql/users'
 import * as InvitationsAPI from '../graphql/invitations'
 import * as NotificationsAPI from '../graphql/notifications'
 
-export default async (root, args): Promise<JWT> => {
-  const { input: { email, first_name, last_name, password, invitation_code } } = args
+export default async (_root, args: any): Promise<JWT> => {
+  const { input: { email, first_name, last_name, password, code } } = args
 
   // Validate fields
   if (password.length < 6) throw new Error('password_lt_six_chars')
@@ -23,7 +23,7 @@ export default async (root, args): Promise<JWT> => {
     community_users: {}
   }
 
-  const invite = await InvitationsAPI.find({ code: invitation_code, email })
+  const invite = await InvitationsAPI.find({ code, email })
   values.community_users = { data: { role: invite.role, community_id: invite.community.id } }
 
   // Create user and generate token

@@ -1,12 +1,9 @@
 import Express from 'express'
-import dotenv from 'dotenv'
 import debug, { Debugger } from 'debug'
 import bodyParser from 'body-parser'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import { makeExecutableSchema } from 'graphql-tools'
 import { typeDefs, resolvers } from './graphqlSchema'
-
-dotenv.config()
 
 // Configure graphql schema
 const schema = makeExecutableSchema({

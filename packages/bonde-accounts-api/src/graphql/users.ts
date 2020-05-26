@@ -52,7 +52,7 @@ export const update = async (id: number, fields: UserUpdateFields): Promise<User
   `
   const variables = { id, fields }
   const resp = await GraphQLAPI.mutate({ mutation: UpdateUserQuery, variables })
-  console.log('resp', resp)
+  
   return resp.data.update_users.returning[0]
 }
 

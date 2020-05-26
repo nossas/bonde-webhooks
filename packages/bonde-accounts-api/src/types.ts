@@ -9,3 +9,9 @@ export interface DecodedToken {
   expired_at: number
   iat: number
 }
+
+export interface Register {
+  email: string
+  code: string
+  isNewUser: boolean
+}
