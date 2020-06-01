@@ -90,7 +90,7 @@ const RegisterForm = ({ to, t }: any) => {
               )}
             />
             <Container reverse>
-              <LinkStyled to='/auth/login' component={Link}>
+              <LinkStyled to='/login' component={Link}>
                 {t('links.iHaveAccount')}
               </LinkStyled>
               <Button type='submit' disabled={submitting}>
