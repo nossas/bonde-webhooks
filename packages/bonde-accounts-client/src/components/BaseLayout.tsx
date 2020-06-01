@@ -47,6 +47,7 @@ const LanguageTool = styled.div`
 interface WrapperStyledProps {
   background?: string;
   hide?: 'mobile' | 'desktop';
+  inverted?: boolean;
 };
 
 const WrapperStyled = styled.div<WrapperStyledProps>`
@@ -62,8 +63,16 @@ const WrapperStyled = styled.div<WrapperStyledProps>`
     background-size: cover;
   `}
 
-  ${Header.h2} {
-    color: #fff;
+  ${props => props.inverted && `
+    ${Header.h2} {
+      color: #fff;
+    }
+  `}
+
+  a {
+    color: #dc82bf;
+    text-decoration: none;
+    font-weight: bold;
   }
 
   @media only screen and (min-width: 768px) {
@@ -104,7 +113,7 @@ const BaseLayout = ({ children }: any) => {
 
   return (
     <BaseStyled>
-      <WrapperStyled hide='mobile' background={BackgroundImage}>
+      <WrapperStyled hide='mobile' background={BackgroundImage} inverted>
         <Bonde large />
         <Header.h2>Quer mobilizar pessoas por uma causa? Cola aí, pode entrar. O BONDE te leva lá.</Header.h2>
       </WrapperStyled>

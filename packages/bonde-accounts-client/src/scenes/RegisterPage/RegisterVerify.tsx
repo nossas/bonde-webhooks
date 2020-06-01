@@ -1,7 +1,18 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from 'bonde-core-tools';
+import { Loading, Header, Text } from 'bonde-components';
 import { useHistory, useLocation } from 'react-router-dom';
+
+const InvalidURL = () => (
+  <>
+    <Header.h2>Opa!</Header.h2>
+    <Text>Esse link é inválido ou já expirou. Entre em contato com a comunidade e peça para te enviarem um novo convite.</Text>
+    <Text>Se o erro persistir, envie um email para <a href="mailto:suporte@bonde.org">suporte@bonde.org</a> com o nome da comunidade que você está tentando acessar.</Text>
+    <Text>Te responderemos o quanto antes :)</Text>
+  </>
+)
+
 
 const registerVerifyMutation = gql`
   mutation RegisterVerify ($code: String!, $email: String!) {
@@ -24,10 +35,10 @@ export type RegisterVerify = {
 }
 
 const Verify = ({ children }: any) => {
-  const [success, setSuccess] = useState(false)
+  const [success, setSuccess] = useState(false);
   const [errors, setErrors] = useState(undefined);
   
-  const [verify] = useMutation(registerVerifyMutation)
+  const [verify] = useMutation(registerVerifyMutation);
   const location = useLocation();
   const history = useHistory();
   
@@ -52,9 +63,9 @@ const Verify = ({ children }: any) => {
   }, [verify, history, location.search]);
 
   // This code is a first check to render
-  if (errors) return `${errors}`;
+  if (errors) return <InvalidURL />;
   
-  if (!success) return 'Loading...';
+  if (!success) return <Loading message="Verificando o link" />;
   
   return children;
 }
