@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { Bonde, Header } from 'bonde-components';
+import { Bonde, Header, Text } from 'bonde-components';
 import BackgroundImage from './bg@2x.png';
 import * as Flag from './Flag';
 
@@ -69,10 +69,12 @@ const WrapperStyled = styled.div<WrapperStyledProps>`
     }
   `}
 
-  a {
-    color: #dc82bf;
-    text-decoration: none;
-    font-weight: bold;
+  ${Text} {
+    a {
+      color: #dc82bf;
+      text-decoration: none;
+      font-weight: bold;
+    }
   }
 
   @media only screen and (min-width: 768px) {
@@ -104,10 +106,9 @@ const languages = [
 ]
 
 const BaseLayout = ({ children }: any) => {
-  const { i18n } = useTranslation();
-  console.log('i18n', i18n)
+  const { i18n, t } = useTranslation('auth');
 
-  const changeLanguage = (lng: 'en' | 'es' | 'pt-BR') => {
+  const changeLanguage = (lng: 'en' | 'es' | 'pt-BR' | string) => {
     i18n.changeLanguage(lng);
   };
 
@@ -115,7 +116,7 @@ const BaseLayout = ({ children }: any) => {
     <BaseStyled>
       <WrapperStyled hide='mobile' background={BackgroundImage} inverted>
         <Bonde large />
-        <Header.h2>Quer mobilizar pessoas por uma causa? Cola aí, pode entrar. O BONDE te leva lá.</Header.h2>
+        <Header.h2>{t('welcome.title')}</Header.h2>
       </WrapperStyled>
       <WrapperStyled>
         {children}
@@ -123,7 +124,7 @@ const BaseLayout = ({ children }: any) => {
           {languages.map(({ flag: Flag, locale }, index) => (
             <button
               key={`language-button-${locale}`}
-              className={locale === i18n.language ? 'active' : null}
+              className={locale === i18n.language ? 'active' : undefined}
               onClick={() => changeLanguage(locale)}
               title={locale}
             >
