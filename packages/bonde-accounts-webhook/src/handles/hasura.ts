@@ -8,9 +8,10 @@ const hasura = async (req: any, res: any) => {
 
   jwt.verify(token, process.env.JWT_SECRET, (err: any, decoded: any) => {
     if (decoded) {
+      const is_super = admins.filter((id: string) => id === String(decoded.user_id)).length > 0;
       const hasuraVariables = {
         'X-Hasura-User-Id': String(decoded.user_id),
-        'X-Hasura-Role': admins.filter((id: string) => id === String(decoded.user_id)).length > 0 ? 'admin' : 'user'
+        'X-Hasura-Role': is_super || Boolean(decoded.is_admin) ? 'admin' : 'user'
       };
 
       return res.status(200).json(hasuraVariables);
