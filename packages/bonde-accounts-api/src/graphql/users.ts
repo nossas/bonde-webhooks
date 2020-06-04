@@ -8,6 +8,7 @@ export interface User {
   last_name?: string
   encrypted_password?: string
   admin: boolean
+  is_admin: boolean
   reset_password_token?: string
 }
 
@@ -20,6 +21,7 @@ export const insert = async (input: any): Promise<User> => {
           email
           first_name
           admin
+          is_admin
         }
       }
     }
@@ -44,6 +46,7 @@ export const update = async (id: number, fields: UserUpdateFields): Promise<User
           first_name
           last_name
           admin
+          is_admin
           encrypted_password
           reset_password_token
         }
@@ -71,6 +74,7 @@ export const find = async (params: UserFilter): Promise<User[]> => {
         first_name
         last_name
         admin
+        is_admin
         encrypted_password
         reset_password_token
       }
