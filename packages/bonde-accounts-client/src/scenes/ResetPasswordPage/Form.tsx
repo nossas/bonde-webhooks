@@ -7,12 +7,15 @@ import {
   InputField,
   Link as LinkStyled,
   Row,
-  Text
+  Text,
+  Validators
 } from 'bonde-components';
 import { useMutation } from 'bonde-core-tools';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
+
+const { composeValidators, required, min } = Validators;
 
 const resetPasswordMutation = gql`
   mutation ResetPassword ($password: String!, $token: String!) {
@@ -49,6 +52,10 @@ const ResetPasswordForm = ({ token }: any) => {
               type='password'
               label={t('resetPassword.fields.password.label')}
               hint={t('resetPassword.fields.password.hint')}
+              validate={composeValidators(
+                required(t('resetPassword.fields.password.required')),
+                min(6, t('resetPassword.fields.password.min6'))
+              )}
             />
             <Row spacing='between'>
               <LinkStyled component={Link} to='/login'>{t('resetPassword.form.cancel')}</LinkStyled>
