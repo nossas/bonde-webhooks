@@ -42,8 +42,9 @@ const ForgetPasswordForm = () => {
   const { t, i18n } = useTranslation('auth');
   const [submitted, setSubmitted] = useState(false);
   
-  const callbackUrl: string = new URL('/reset-password', appDomain).href;
-  
+  const callbackUrl: string = new URL('/reset-password?token=', appDomain).href;
+  console.log('callbackUrl', { callbackUrl });
+
   const submit = async (values: any) => {
     try {
       const { data } = await forgetPassword({ variables: values });
