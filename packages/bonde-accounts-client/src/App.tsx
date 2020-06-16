@@ -9,6 +9,8 @@ import SessionRedirect from './components/SessionRedirect';
 import TextLoading from './components/TextLoading';
 import LoginPage from './scenes/LoginPage';
 import RegisterPage from './scenes/RegisterPage';
+import ForgetPasswordPage from './scenes/ForgetPasswordPage';
+import ResetPasswordPage from './scenes/ResetPasswordPage';
 import i18n from './i18n';
 
 const history = createBrowserHistory();
@@ -42,6 +44,12 @@ const App = React.memo(() => {
               </Route>
               <Route exact path='/register'>
                 <RegisterPage to={appUrl} />
+              </Route>
+              <Route exact path='/forget-password'>
+                <ForgetPasswordPage />
+              </Route>
+              <Route exact path='/reset-password'>
+                <ResetPasswordPage />
               </Route>
             </BaseLayout>
           </SessionRedirect>

@@ -4,13 +4,13 @@ import {
   Button,
   Form,
   InputField,
-  // Link as LinkStyled,
+  Link as LinkStyled,
   Validators,
   Row,
   Col
 } from 'bonde-components';
 import { Form as FinalForm } from 'react-final-form';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 
@@ -53,12 +53,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                 min(6, t('fields.password.errors.min'))
               )}
             />
-            <Row flex='end'>
-              {/* <Col size={[3, 3, 12, 12]}>
-                <LinkStyled component={Link} to='/auth/reset-password'>
+            <Row spacing='between'>
+              <Col size={[3, 3, 12, 12]}>
+                <LinkStyled component={Link} to='/forget-password'>
                   {t('links.forgetPassword')}
                 </LinkStyled>
-              </Col> */}
+              </Col>
               <Col size={[3, 3, 12, 12]}>
                 <Button type='submit' disabled={submitting}>
                   {t('button.submit')}
