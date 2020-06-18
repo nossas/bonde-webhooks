@@ -27,7 +27,7 @@
     "clean": "rm -rf node_modules dist",
     "build": "tsc",
     "test": "jest",
-    "lint": "eslint . --ext js,ts,tsx --fix"
+    "lint": "eslint . --ext ts,tsx --fix"
   },
   "husky": {
     "hooks": {
@@ -36,7 +36,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "eslint --fix --ext js,ts,tsx",
+      "eslint --fix --ext ts,tsx",
       "git add"
     ]
   },

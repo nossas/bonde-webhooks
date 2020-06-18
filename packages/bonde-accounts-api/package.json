@@ -31,7 +31,7 @@
     "dev": "DEBUG=bonde-accounts-api tsc-watch --onSuccess \"node dist/index.js\"",
     "clean": "rm -rf node_modules dist",
     "build": "tsc",
-    "lint": "eslint . --ext js,ts,tsx --fix"
+    "lint": "eslint . --ext ts,tsx --fix"
   },
   "husky": {
     "hooks": {
