@@ -6,10 +6,11 @@ pipeline:
       - REACT_APP_HASURA_API_URL=https://api-graphql.staging.bonde.org/v1/graphql
       - REACT_APP_ADMIN_URL=https://admin-canary.staging.bonde.org
       - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.staging.bonde.org
+      - REACT_APP_DOMAIN=https://accounts.staging.bonde.org
     commands:
       - export REACT_APP_LOCIZE_PROJECT_ID=$LOCIZE_PROJECT_ID
       - export REACT_APP_LOCIZE_API_KEY=$LOCIZE_API_KEY
-      - yarn global add pnpm
+      - yarn global add pnpm@4.14.2
       - pnpm i
       - pnpm m run build
     secrets: [ locize_project_id, locize_api_key ]
@@ -22,10 +23,11 @@ pipeline:
       - REACT_APP_HASURA_API_URL=https://api-graphql.bonde.org/v1/graphql
       - REACT_APP_ADMIN_URL=https://admin-canary.bonde.org
       - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.bonde.org
+      - REACT_APP_DOMAIN=https://accounts.bonde.org
     commands:
       - export REACT_APP_LOCIZE_PROJECT_ID=$LOCIZE_PROJECT_ID
       - export REACT_APP_LOCIZE_API_KEY=$LOCIZE_API_KEY
-      - yarn global add pnpm
+      - yarn global add pnpm@4.14.2
       - pnpm i
       - pnpm m run build
     secrets: [ locize_project_id, locize_api_key ]
