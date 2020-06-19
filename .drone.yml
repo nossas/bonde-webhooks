@@ -9,7 +9,7 @@ pipeline:
     commands:
       - export REACT_APP_LOCIZE_PROJECT_ID=$LOCIZE_PROJECT_ID
       - export REACT_APP_LOCIZE_API_KEY=$LOCIZE_API_KEY
-      - yarn global add pnpm
+      - yarn global add pnpm@4.14.2
       - pnpm i
       - pnpm m run build
     secrets: [ locize_project_id, locize_api_key ]
