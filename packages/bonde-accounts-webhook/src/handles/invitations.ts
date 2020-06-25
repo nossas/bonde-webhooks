@@ -24,11 +24,11 @@ const handle = async (req: EventRequest<Invite>, res: any) => {
     context: { invite_url: url, community: invite.community }
   }
   // Send email
-  const notify = await NotificationsAPI.send(input, TEMPLATE)
+  await NotificationsAPI.send(input, TEMPLATE)
   // Done!
   return res
     .status(200)
-    .json({ object_id: invite.id, notify_id: notify.id })
+    .json({ object_id: invite.id })
 }
 
 export default handle;
