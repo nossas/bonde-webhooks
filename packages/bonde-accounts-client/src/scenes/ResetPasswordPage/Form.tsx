@@ -45,7 +45,7 @@ const ResetPasswordForm = ({ token }: any) => {
       <Header.h2>{t('resetPassword.form.title')}</Header.h2>
       <Text>{t('resetPassword.form.subtitle')}</Text>
       <ConnectedForm initialValues={{ token }} onSubmit={submit}>
-        {({ submitting }) => (
+        {({ submitting }: any) => (
           <>
             <InputField
               name='password'

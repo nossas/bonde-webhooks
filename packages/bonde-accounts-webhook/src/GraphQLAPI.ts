@@ -14,7 +14,7 @@ if (!process.env.JWT_TOKEN && !process.env.HASURA_SECRET) {
 // Create an http link:
 const httpLink = new HttpLink({
   uri: process.env.GRAPHQL_HTTP_URL || 'http://localhost:3000/graphql',
-  fetch
+  fetch: fetch as any
 })
 
 // Create auth middleware for http request

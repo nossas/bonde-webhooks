@@ -32,7 +32,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   return (
     <Styles>
       <FinalForm onSubmit={onSubmit}>
-        {({ handleSubmit, submitting }) => (
+        {({ handleSubmit, submitting }: any) => (
           <Form onSubmit={handleSubmit}>
             <InputField
               name='email'

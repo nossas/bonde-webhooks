@@ -56,7 +56,7 @@ const RegisterForm = ({ to, t }: any) => {
           }
         }}
       >
-        {({ submitting }) => (
+        {({ submitting }: any) => (
           <Styles>
             {error && <Hint color='error'>{error}</Hint>}
             <Container column>
