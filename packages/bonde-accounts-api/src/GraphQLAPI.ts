@@ -19,7 +19,7 @@ const uri: string = process.env.GRAPHQL_HTTP_URL || 'http://localhost:3000/graph
 dbg(`Connect GraphQL API on ${uri}...`)
 
 // Create an http link:
-const httpLink = new HttpLink({ uri, fetch })
+const httpLink = new HttpLink({ uri, fetch: fetch as any })
 
 // Create auth middleware for http request
 const authMiddleware = new ApolloLink((operation, forward) => {

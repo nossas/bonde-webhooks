@@ -1,11 +1,6 @@
 {
   "name": "bonde-accounts-webhook",
   "dependencies": {
-    "@types/debug": "^4.1.5",
-    "@types/dotenv": "^6.1.1",
-    "@types/express": "^4.17.1",
-    "@types/jsonwebtoken": "^8.3.4",
-    "@types/source-map-support": "^0.5.0",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
     "apollo-link": "^1.2.13",
@@ -17,8 +12,8 @@
     "graphql-tag": "^2.10.1",
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.2.1",
+    "node-fetch": "^2.6.0",
     "source-map-support": "^0.5.13",
-    "typescript": "^3.6.4",
     "url-join": "^4.0.1"
   },
   "scripts": {
@@ -41,6 +36,12 @@
     ]
   },
   "devDependencies": {
-    "jest": "^26.0.1"
+    "@types/debug": "^4.1.5",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^4.17.1",
+    "@types/jsonwebtoken": "^8.3.4",
+    "@types/node-fetch": "^2.5.7",
+    "@types/source-map-support": "^0.5.0",
+    "typescript": "^3.6.4"
   }
 }
