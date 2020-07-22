@@ -34,14 +34,16 @@ export const findTemplate = async (filter: FilterTemplate): Promise<Template> =>
 export interface Notify {
   email_to: string
   email_from: string
-  created_at?: string
-  delivered_at?: string
   subject?: string
   body?: string
   context?: object
 }
 
-export const send = async (input: Notify, template?: FilterTemplate): Promise<Notify> => {
+export interface NotifyResponse {
+  status: any
+}
+
+export const send = async (input: Notify, template?: FilterTemplate): Promise<NotifyResponse> => {
   if (!!template) {
     const { subject_template, body_template } = await findTemplate(template)
     input.subject = subject_template
@@ -49,19 +51,14 @@ export const send = async (input: Notify, template?: FilterTemplate): Promise<No
   }
 
   const insertMailMutation = gql`
-    mutation SendMail ($input: [notify_mail_insert_input!]!){
-      insert_notify_mail(objects: $input) {
-        returning {
-          email_to
-          email_from
-          created_at
-          delivered_at
-        }
+    mutation SendMail ($input: [NotifyInput!]!){
+      notify(input: $input) {
+        status
       }
     }
   `
 
   const resp = await GraphQLAPI.mutate({ mutation: insertMailMutation, variables: { input } })
 
-  return resp.data.insert_notify_mail.returning[0]
+  return resp.data
 }
