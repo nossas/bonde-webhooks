@@ -43,5 +43,13 @@ Response: { first_name: String!, valid: Boolean!, token: String! }
 - `password_lt_six_chars`: throwed on **register** mutation when password is less than 6 caracters
 - `email_already_exists`: throwed on **register** mutation when user already exists in Bonde
 
+## Environment
+
+```
+PORT=
+GRAPHQL_HTTP_URL=
+JWT_SECRET=
+HASURA_SECRET=
+```
 _________________________________________
 <p align='right'>:heart_eyes: Made with love by <b>B</b>onde!</p>
