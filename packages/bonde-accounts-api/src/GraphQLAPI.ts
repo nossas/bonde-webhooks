@@ -1,14 +1,12 @@
-import debug, { Debugger } from 'debug'
 import dotenv from 'dotenv'
 import fetch from 'node-fetch'
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink, concat } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+import logger from './logger';
 
 dotenv.config()
-
-const dbg: Debugger = debug(process.env.DEBUG)
 
 if (!process.env.JWT_TOKEN && !process.env.HASURA_SECRET) {
   throw new Error('Please specify the `JWT_TOKEN` or `HASURA_SECRET` environment variable.')
@@ -16,7 +14,7 @@ if (!process.env.JWT_TOKEN && !process.env.HASURA_SECRET) {
 
 const uri: string = process.env.GRAPHQL_HTTP_URL || 'http://localhost:3000/graphql'
 
-dbg(`Connect GraphQL API on ${uri}...`)
+logger.info(`Connect GraphQL API on ${uri}...`)
 
 // Create an http link:
 const httpLink = new HttpLink({ uri, fetch: fetch as any })

@@ -1,3 +1,6 @@
+import 'graphql-import-node';
+import { makeExecutableSchema } from 'graphql-tools';
+import { GraphQLSchema } from 'graphql';
 import {
   authenticate,
   register,
@@ -49,3 +52,7 @@ export const resolvers = {
     reset_password_change
   }
 }
+
+const schema: GraphQLSchema = makeExecutableSchema({ typeDefs, resolvers });
+
+export default schema;
