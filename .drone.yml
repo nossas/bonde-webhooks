@@ -33,6 +33,18 @@ pipeline:
     secrets: [ locize_project_id, locize_api_key ]
     when:
       event: tag
+
+  unit-tests:
+    image: node:12-alpine
+    environment:
+      - SKIP_PREFLIGHT_CHECK=true
+    commands:
+      - apk --update add curl
+      - curl -L https://unpkg.com/@pnpm/self-installer | node
+      - pnpm m run coverage
+    when:
+      event: [push, tag]
+
   
   docker-staging-publish:
     image: plugins/docker
