@@ -5,6 +5,7 @@ const admins: string[] = (process.env.ADMINS || '').split(',');
 const hasura = async (req: any, res: any) => {
   const authorization = req.get('Authorization');
   const token = authorization ? authorization.replace('Bearer ', '') : null;
+  console.log('hasura login', { token });
 
   jwt.verify(token, process.env.JWT_SECRET, (err: any, decoded: any) => {
     if (decoded) {
