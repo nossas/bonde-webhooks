@@ -15,7 +15,7 @@ import { useMutation } from 'bonde-core-tools';
 import gql from 'graphql-tag'
 
 const { isEmail } = Validators;
-const appDomain = process.env.REACT_APP_DOMAIN || 'http://accounts.bonde.devel:5000';
+const appDomain = process.env.REACT_APP_DOMAIN || 'http://bonde.devel:5000';
 
 const forgetPasswordMutation = gql`
   mutation RequestForgetPassword ($email: String!, $callbackUrl: String!, $locale: String) {
@@ -41,7 +41,7 @@ const ForgetPasswordForm = () => {
   const [forgetPassword] = useMutation(forgetPasswordMutation);
   const { t, i18n } = useTranslation('auth');
   const [submitted, setSubmitted] = useState(false);
-  
+
   const callbackUrl: string = new URL('/reset-password?token=', appDomain).href;
 
   const submit = async (values: any) => {
