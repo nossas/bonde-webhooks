@@ -1,10 +1,11 @@
 import jwt from 'jsonwebtoken';
+import express from 'express';
 
 const admins: string[] = (process.env.ADMINS || '').split(',');
 
-const hasura = async (req: any, res: any) => {
+const hasura = async (req: express.Request, res: express.Response) => {
   const authorization = req.get('Authorization');
-  const token = authorization ? authorization.replace('Bearer ', '') : null;
+  const token = authorization ? authorization.replace('Bearer ', '') : '';
 
   jwt.verify(token, process.env.JWT_SECRET, (err: any, decoded: any) => {
     if (decoded) {
@@ -13,6 +14,15 @@ const hasura = async (req: any, res: any) => {
         'X-Hasura-User-Id': String(decoded.user_id),
         'X-Hasura-Role': is_super || Boolean(decoded.is_admin) ? 'admin' : 'user'
       };
+
+      const sevenDaysToSeconds = 7 * 24 * 60 * 60;
+      res.cookie('session', token,
+        {
+          maxAge: sevenDaysToSeconds,
+          httpOnly: true,
+          domain: process.env.NODE_ENV === 'production' ? '*.staging.bonde.org' : '*.bonde.devel',
+          secure: process.env.NODE_ENV === 'production' ? true : false,
+        });
 
       return res.status(200).json(hasuraVariables);
     } else if (err.message === 'jwt must be provided') {
@@ -24,7 +34,6 @@ const hasura = async (req: any, res: any) => {
 };
 
 export default hasura;
-
 
 /**
  * Users Roles (Bonde)
