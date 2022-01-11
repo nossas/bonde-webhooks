@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
+import express from 'express';
 
 const admins: string[] = (process.env.ADMINS || '').split(',');
 
-const hasura = async (req: any, res: any) => {
+const hasura = async (req: express.Request, res: express.Response) => {
   const authorization = req.get('Authorization');
   const token = authorization ? authorization.replace('Bearer ', '') : null;
 
@@ -14,6 +15,16 @@ const hasura = async (req: any, res: any) => {
         'X-Hasura-Role': is_super || Boolean(decoded.is_admin) ? 'admin' : 'user'
       };
 
+      const sevenDaysToSeconds = 7 * 24 * 60 * 60;
+      res.cookie('session', token,
+        {
+          maxAge: sevenDaysToSeconds,
+          // You can't access these tokens in the client's javascript
+          httpOnly: true,
+          // Forces to use https in production
+          secure: process.env.NODE_ENV === 'production' ? true : false
+        });
+
       return res.status(200).json(hasuraVariables);
     } else if (err.message === 'jwt must be provided') {
       return res.status(200).json({ 'X-Hasura-Role': 'anonymous' });
@@ -24,7 +35,6 @@ const hasura = async (req: any, res: any) => {
 };
 
 export default hasura;
-
 
 /**
  * Users Roles (Bonde)
