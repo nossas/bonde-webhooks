@@ -1,4 +1,5 @@
 import Express from 'express'
+import morgan from 'morgan'
 import dotenv from 'dotenv'
 import debug, { Debugger } from 'debug'
 import invitations from './handles/invitations';
@@ -21,6 +22,7 @@ class Server {
 
   start = () => {
     const { PORT, HOST } = process.env
+    this.server.use(morgan('combined'))
     this.server
       .get('/', this.health.bind(this))
       .get('/hasura', hasura)
