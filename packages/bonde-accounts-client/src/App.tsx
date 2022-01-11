@@ -16,8 +16,8 @@ import i18n from './i18n';
 const history = createBrowserHistory();
 
 const config = {
-  crossStorageUrl: process.env.REACT_APP_DOMAIN_CROSS_STORAGE || 'http://cross-storage.bonde.devel',
-  graphqlApiUrl: process.env.REACT_APP_HASURA_API_URL || 'https://api-graphql.staging.bonde.org/v1/graphql'
+  crossStorageUrl: process.env.REACT_APP_DOMAIN_CROSS_STORAGE || 'http://bonde.devel:5003',
+  graphqlApiUrl: process.env.REACT_APP_HASURA_API_URL || 'http://api-graphql.bonde.devel/v1/graphql'
 };
 
 const LoadingI18n = () => (
@@ -28,7 +28,7 @@ const LoadingI18n = () => (
 )
 
 const App = React.memo(() => {
-  const appUrl = process.env.REACT_APP_ADMIN_URL || 'http://app.bonde.devel:8181';
+  const appUrl = process.env.REACT_APP_ADMIN_URL || 'http://bonde.devel:5001';
 
   return (
     <BondeSessionProvider loading={TextLoading} config={config}>
