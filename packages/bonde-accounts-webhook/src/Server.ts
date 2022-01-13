@@ -1,4 +1,5 @@
 import Express from 'express'
+import morgan from 'morgan'
 import dotenv from 'dotenv'
 import debug, { Debugger } from 'debug'
 import invitations from './handles/invitations';
@@ -7,7 +8,9 @@ import hasura from './handles/hasura';
 dotenv.config()
 
 class Server {
-  private server = Express().use(Express.json())
+  private server = Express().use(
+    Express.json() as any
+  )
 
   private dbg: Debugger
 
@@ -21,6 +24,7 @@ class Server {
 
   start = () => {
     const { PORT, HOST } = process.env
+    this.server.use(morgan('combined'))
     this.server
       .get('/', this.health.bind(this))
       .get('/hasura', hasura)
