@@ -8,7 +8,9 @@ import hasura from './handles/hasura';
 dotenv.config()
 
 class Server {
-  private server = Express().use(Express.json())
+  private server = Express().use(
+    Express.json() as any
+  )
 
   private dbg: Debugger
 
